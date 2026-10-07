@@ -1,0 +1,3458 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Emmanuel Nwanjiobi & Co. | 3D Spatial Digital Twin & Asset Valuation</title>
+  <meta name="description" content="Premier Estate Surveying, Asset Valuation, Resettlement Action Planning (RAP), and Real Estate Advisory firm based in Abuja, Nigeria. Featuring an interactive 3D WebGL Digital Twin." />
+  <meta property="og:title" content="Emmanuel Nwanjiobi & Co. | 3D Spatial Twin & Asset Valuation" />
+  <meta property="og:description" content="Interactive 3D WebGL digital twin, asset valuation simulator, and Resettlement Action Planning (RAP) platform for Emmanuel Nwanjiobi & Co., Abuja, Nigeria." />
+  <meta property="og:type" content="website" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <!-- Schema.org JSON-LD Structured Data for Local SEO & Professional Verification -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "RealEstateAgent",
+    "name": "Emmanuel Nwanjiobi & Co.",
+    "alternateName": "Emmanuel Nwanjiobi Estate Surveyors & Valuers",
+    "description": "Registered Estate Surveyors, Asset Valuers, and Resettlement Action Planning (RAP) consultants in Abuja, Nigeria. Certified by ESVARBON and NIESV.",
+    "telephone": "+2348060820365",
+    "email": "EmmanuelNwanjiobi@gmail.com",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "30 Okemesi Crescent, Opposite Winner Lab, Garki 2",
+      "addressLocality": "Abuja",
+      "addressRegion": "Federal Capital Territory",
+      "postalCode": "900110",
+      "addressCountry": "NG"
+    },
+    "geo": {
+      "@type": "GeoCoordinates",
+      "latitude": 9.0326,
+      "longitude": 7.4891
+    },
+    "openingHoursSpecification": [
+      {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+        "opens": "08:00",
+        "closes": "18:00"
+      },
+      {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": "Saturday",
+        "opens": "09:00",
+        "closes": "14:00"
+      }
+    ],
+    "priceRange": "₦₦₦₦",
+    "knowsAbout": [
+      "Estate Surveying",
+      "Asset Valuation",
+      "Abuja Geographic Information Systems (AGIS) Due Diligence",
+      "Resettlement Action Planning (RAP)",
+      "World Bank ESS5 Compliance",
+      "Certificate of Occupancy (C of O) Title Regularization"
+    ]
+  }
+  </script>
+
+  <!-- Google Fonts: Raleway & JetBrains Mono & Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700;800&family=Raleway:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+
+  <!-- FontAwesome 6 Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            raleway: ['Raleway', 'sans-serif'],
+            mono: ['"JetBrains Mono"', 'monospace'],
+            syne: ['"JetBrains Mono"', 'monospace'],
+            inter: ['Inter', 'sans-serif'],
+          },
+          colors: {
+            deep: '#050811',
+            glass: 'rgba(12, 18, 34, 0.75)',
+            'glass-border': 'rgba(255, 255, 255, 0.08)',
+            'neon-emerald': '#00F5A0',
+            'imperial-gold': '#FFB800',
+            'electric-blue': '#00D8F6',
+          },
+          boxShadow: {
+            'glow-emerald': '0 0 25px rgba(0, 245, 160, 0.25)',
+            'glow-blue': '0 0 25px rgba(0, 216, 246, 0.25)',
+            'glow-gold': '0 0 25px rgba(255, 184, 0, 0.25)',
+          }
+        }
+      }
+    };
+  </script>
+
+  <!-- Three.js CDN -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
+  <style>
+    /* Print Stylesheet for Formal Executive Memorandum */
+    @media print {
+      body {
+        background: #ffffff !important;
+        color: #111827 !important;
+      }
+      header, footer, section, #verification-modal, .scanline, button, nav, #three-container, #district-tags-layer {
+        display: none !important;
+      }
+      #export-modal {
+        display: block !important;
+        position: static !important;
+        background: #ffffff !important;
+        padding: 0 !important;
+        width: 100% !important;
+        max-width: 100% !important;
+      }
+      #export-modal .glass-panel {
+        background: #ffffff !important;
+        border: none !important;
+        box-shadow: none !important;
+        padding: 0 !important;
+        color: #111827 !important;
+      }
+      #modal-report-content {
+        background: #ffffff !important;
+        color: #111827 !important;
+        border: 2px solid #0f172a !important;
+        padding: 24px !important;
+        border-radius: 8px !important;
+      }
+      #modal-report-content * {
+        color: #111827 !important;
+      }
+      #modal-report-content .text-neon-emerald,
+      #modal-report-content .text-imperial-gold {
+        color: #065f46 !important;
+        font-weight: 800 !important;
+      }
+      #export-modal button {
+        display: none !important;
+      }
+    }
+
+    /* Custom Cyber-Glass & Architectural Scrollbar */
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #050811;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: rgba(0, 245, 160, 0.3);
+      border-radius: 3px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: rgba(0, 245, 160, 0.6);
+    }
+    
+    .glass-panel {
+      background: rgba(12, 18, 34, 0.78);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .glass-card-hover {
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .glass-card-hover:hover {
+      border-color: rgba(0, 245, 160, 0.4);
+      transform: translateY(-2px);
+      box-shadow: 0 10px 30px -10px rgba(0, 245, 160, 0.15);
+    }
+
+    /* Grid pattern background overlay */
+    .bg-grid-cyber {
+      background-image: 
+        linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+      background-size: 40px 40px;
+    }
+
+    /* Scanline effect */
+    .scanline {
+      position: absolute;
+      top: 0; left: 0; right: 0; height: 2px;
+      background: linear-gradient(90deg, transparent, #00F5A0, transparent);
+      animation: scan 4s linear infinite;
+      opacity: 0.6;
+      pointer-events: none;
+    }
+    @keyframes scan {
+      0% { top: 0%; opacity: 0; }
+      15% { opacity: 0.8; }
+      85% { opacity: 0.8; }
+      100% { top: 100%; opacity: 0; }
+    }
+
+    /* Range input styling */
+    input[type=range] {
+      -webkit-appearance: none;
+      height: 6px;
+      background: #1a2238;
+      border-radius: 4px;
+      outline: none;
+    }
+    input[type=range]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: #00F5A0;
+      cursor: pointer;
+      box-shadow: 0 0 10px rgba(0, 245, 160, 0.8);
+      border: 2px solid #050811;
+      transition: transform 0.15s ease;
+    }
+    input[type=range]::-webkit-slider-thumb:hover {
+      transform: scale(1.2);
+    }
+  </style>
+</head>
+
+<body class="bg-[#050811] text-slate-100 font-inter antialiased selection:bg-neon-emerald selection:text-black overflow-x-hidden">
+
+  <!-- ========================================================================= -->
+  <!-- 1. HEADER & TOP BAR NAVIGATION                                           -->
+  <!-- ========================================================================= -->
+  <header class="sticky top-0 z-50 w-full glass-panel border-b border-white/10 transition-all">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+      
+      <!-- Brand Lockup -->
+      <a href="#hero" class="flex items-center gap-3.5 group cursor-pointer focus:outline-none">
+        <div class="w-11 h-11 rounded-xl bg-slate-900/90 border border-neon-emerald/40 flex items-center justify-center p-1.5 shadow-glow-emerald group-hover:scale-105 group-hover:border-neon-emerald transition-all">
+          <svg class="w-full h-full" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="headerLogoGrad" x1="4" y1="4" x2="44" y2="44" gradientUnits="userSpaceOnUse">
+                <stop offset="0%" stop-color="#00F5A0" />
+                <stop offset="60%" stop-color="#00D8F6" />
+                <stop offset="100%" stop-color="#FFB800" />
+              </linearGradient>
+              <linearGradient id="headerLogoGlow" x1="0" y1="0" x2="48" y2="48" gradientUnits="userSpaceOnUse">
+                <stop offset="0%" stop-color="#00F5A0" stop-opacity="0.25" />
+                <stop offset="100%" stop-color="#00D8F6" stop-opacity="0.05" />
+              </linearGradient>
+            </defs>
+            <!-- Hexagonal Cadastral Boundary Prism -->
+            <polygon points="24,4 42,14 42,34 24,44 6,34 6,14" stroke="url(#headerLogoGrad)" stroke-width="1.8" stroke-linejoin="round" fill="url(#headerLogoGlow)" />
+            <!-- Cardinal Surveyor Coordinate Ticks -->
+            <line x1="24" y1="1" x2="24" y2="5" stroke="#00F5A0" stroke-width="1.5" stroke-linecap="round" />
+            <line x1="24" y1="43" x2="24" y2="47" stroke="#00F5A0" stroke-width="1.5" stroke-linecap="round" />
+            <line x1="3" y1="24" x2="7" y2="24" stroke="#00F5A0" stroke-width="1.5" stroke-linecap="round" />
+            <line x1="41" y1="24" x2="45" y2="24" stroke="#00F5A0" stroke-width="1.5" stroke-linecap="round" />
+            <!-- Interlocking E & N Architectural Monogram -->
+            <path d="M15 15V33M15 15H24M15 24H22M15 33H24" stroke="#FFFFFF" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" />
+            <path d="M20 33L31 15V33" stroke="url(#headerLogoGrad)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" />
+            <!-- Central Surveyor Cadastral Node -->
+            <circle cx="24" cy="24" r="2" fill="#FFB800" />
+            <circle cx="24" cy="24" r="3.8" stroke="#FFB800" stroke-width="0.7" stroke-dasharray="1.2 1.2" />
+          </svg>
+        </div>
+        <div class="flex flex-col">
+          <span class="font-mono font-bold text-base sm:text-lg tracking-wider text-white group-hover:text-neon-emerald transition-colors">
+            EMMANUEL NWANJIOBI & CO.
+          </span>
+          <span class="text-xs font-mono text-slate-400 tracking-tight flex items-center gap-1.5">
+            <span class="w-1.5 h-1.5 rounded-full bg-neon-emerald animate-pulse"></span>
+            Abuja Estate Surveyors &amp; Valuation Consultants
+          </span>
+        </div>
+      </a>
+
+      <!-- Navigation Links (Desktop) -->
+      <nav class="hidden lg:flex items-center gap-1 p-1 rounded-full bg-slate-900/80 border border-white/10 backdrop-blur-md text-xs font-medium text-slate-300 shadow-inner">
+        <a href="#investor-pathways" class="px-3.5 py-1.5 rounded-full hover:text-white hover:bg-white/10 transition-all font-semibold text-white flex items-center gap-1.5">
+          <i class="fa-solid fa-compass text-neon-emerald"></i>
+          <span>Investor Guide</span>
+        </a>
+        <a href="#digital-twin" class="px-3.5 py-1.5 rounded-full hover:text-white hover:bg-white/10 transition-all flex items-center gap-1.5">
+          <i class="fa-solid fa-cube text-neon-emerald"></i>
+          <span>3D Twin</span>
+        </a>
+        <a href="#valuation-simulator" class="px-3.5 py-1.5 rounded-full hover:text-white hover:bg-white/10 transition-all flex items-center gap-1.5">
+          <i class="fa-solid fa-calculator text-electric-blue"></i>
+          <span>Simulator</span>
+        </a>
+        <a href="#safety-checklist" class="px-3.5 py-1.5 rounded-full hover:text-white hover:bg-white/10 transition-all flex items-center gap-1.5">
+          <i class="fa-solid fa-shield-halved text-amber-400"></i>
+          <span>Due Diligence</span>
+        </a>
+        <a href="#project-experience" class="px-3.5 py-1.5 rounded-full hover:text-white hover:bg-white/10 transition-all">
+          <span>Track Record</span>
+        </a>
+        <a href="#glossary-faq" class="px-3.5 py-1.5 rounded-full hover:text-white hover:bg-white/10 transition-all">
+          <span>Glossary &amp; FAQs</span>
+        </a>
+      </nav>
+
+      <!-- Action Buttons -->
+      <div class="hidden sm:flex items-center gap-2.5">
+        <button onclick="openVerificationModal()" class="px-3.5 py-2 text-xs font-bold rounded-lg bg-neon-emerald hover:bg-emerald-400 text-slate-950 shadow-glow-emerald transition-all flex items-center gap-1.5 font-mono">
+          <i class="fa-solid fa-shield-halved"></i>
+          <span>Verify a Plot</span>
+        </button>
+        <button onclick="openExportModal()" class="px-3 py-2 text-xs font-semibold rounded-lg bg-slate-900/90 hover:bg-slate-800 text-slate-200 border border-white/10 hover:border-neon-emerald/40 transition-all flex items-center gap-1.5">
+          <i class="fa-solid fa-file-contract text-neon-emerald"></i>
+          <span>Valuation Memo</span>
+        </button>
+      </div>
+
+      <!-- Mobile Hamburger Button -->
+      <button onclick="toggleMobileNav()" class="lg:hidden p-2 rounded-lg text-slate-300 hover:text-white hover:bg-white/5 border border-white/10 focus:outline-none" aria-label="Toggle navigation">
+        <i id="mobile-nav-icon" class="fa-solid fa-bars text-lg"></i>
+      </button>
+
+    </div>
+
+    <!-- Mobile Nav Drawer -->
+    <div id="mobile-nav" class="hidden lg:hidden px-6 pt-3 pb-6 border-t border-white/10 bg-[#070b18]/95 space-y-3">
+      <a href="#investor-pathways" onclick="toggleMobileNav()" class="block py-2 text-sm text-neon-emerald font-semibold">Investor Guide: How We Help</a>
+      <a href="#digital-twin" onclick="toggleMobileNav()" class="block py-2 text-sm text-slate-200 hover:text-neon-emerald">3D Spatial Twin</a>
+      <a href="#valuation-simulator" onclick="toggleMobileNav()" class="block py-2 text-sm text-slate-200 hover:text-neon-emerald">Valuation &amp; RAP Simulator</a>
+      <a href="#safety-checklist" onclick="toggleMobileNav()" class="block py-2 text-sm text-slate-200 hover:text-neon-emerald">Abuja Land Safety Checklist</a>
+      <a href="#project-experience" onclick="toggleMobileNav()" class="block py-2 text-sm text-slate-200 hover:text-neon-emerald">Project Experience</a>
+      <a href="#glossary-faq" onclick="toggleMobileNav()" class="block py-2 text-sm text-slate-200 hover:text-neon-emerald">Real Estate Glossary &amp; FAQs</a>
+      <div class="pt-3 flex gap-2">
+        <button onclick="openVerificationModal(); toggleMobileNav();" class="flex-1 py-2 text-xs font-bold rounded-lg bg-neon-emerald text-slate-950 text-center font-mono">
+          <i class="fa-solid fa-shield-halved mr-1"></i> Verify a Plot
+        </button>
+        <button onclick="openExportModal(); toggleMobileNav();" class="flex-1 py-2 text-xs font-semibold rounded-lg bg-slate-800 text-slate-200 border border-white/10 text-center">
+          Valuation Memo
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ========================================================================= -->
+  <!-- HERO BANNER                                                               -->
+  <!-- ========================================================================= -->
+  <section id="hero" class="relative pt-12 pb-8 sm:pt-16 sm:pb-12 overflow-hidden bg-grid-cyber">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <!-- Trust Metadata Bar -->
+      <div class="flex flex-wrap items-center justify-center gap-3 text-xs font-mono text-slate-400 mb-6 text-center">
+        <span class="text-neon-emerald font-semibold uppercase tracking-wider">Institutionally Accredited</span>
+        <span aria-hidden="true" class="text-slate-600">·</span>
+        <span>ESVARBON Reg. Firm</span>
+        <span aria-hidden="true" class="text-slate-600">·</span>
+        <span>NIESV Corporate Member</span>
+        <span aria-hidden="true" class="text-slate-600">·</span>
+        <span class="text-imperial-gold font-medium">AGIS / FCDA Cadastral Reconciled</span>
+        <span aria-hidden="true" class="text-slate-600">·</span>
+        <span class="text-electric-blue">World Bank ESS5 &amp; IFC PS5 Specialist</span>
+      </div>
+
+      <!-- Main Headline -->
+      <div class="max-w-4xl mx-auto text-center">
+        <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-neon-emerald/10 border border-neon-emerald/30 text-neon-emerald text-xs font-mono uppercase tracking-wider mb-4">
+          <i class="fa-solid fa-award"></i>
+          <span>Certified Estate Surveyors &amp; Valuers · Abuja, Nigeria</span>
+        </div>
+        <h1 class="font-raleway font-extrabold text-3xl sm:text-5xl lg:text-6xl text-white tracking-tight leading-[1.15] mb-6">
+          Precision Cadastral Surveying, <br />
+          <span class="text-transparent bg-clip-text bg-gradient-to-r from-neon-emerald via-electric-blue to-imperial-gold font-black">
+            Asset Valuation &amp; RAP Advisory
+          </span>
+          in Nigeria.
+        </h1>
+        <p class="text-slate-300 text-base sm:text-lg leading-relaxed max-w-3xl mx-auto mb-8">
+          Emmanuel Nwanjiobi &amp; Co. delivers institutional real estate appraisal, Full Replacement Value (FRV) asset audits, and infrastructure corridor Resettlement Action Planning (RAP) across Abuja and Nigeria. Powered by extensive executive directorship leadership in national power transmission grids, federal highway concessions, and urban capital projects.
+        </p>
+
+        <!-- Key Metrics Strip -->
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 p-5 rounded-xl glass-panel border border-white/10 font-mono text-center">
+          <div>
+            <div class="text-xs text-slate-400 uppercase tracking-wider mb-1">Asset Portfolio Valued</div>
+            <div class="text-xl sm:text-2xl font-bold text-white tabular-nums">₦480B+</div>
+            <div class="text-[11px] text-slate-500">Capital &amp; Plant Assets</div>
+          </div>
+          <div>
+            <div class="text-xs text-slate-400 uppercase tracking-wider mb-1">RAP Corridors Executed</div>
+            <div class="text-xl sm:text-2xl font-bold text-neon-emerald tabular-nums">1,250+ km</div>
+            <div class="text-[11px] text-slate-500">World Bank ESS5 / IFC PS5</div>
+          </div>
+          <div>
+            <div class="text-xs text-slate-400 uppercase tracking-wider mb-1">Cadastral Verification</div>
+            <div class="text-xl sm:text-2xl font-bold text-electric-blue tabular-nums">100%</div>
+            <div class="text-[11px] text-slate-500">AGIS &amp; FCDA Reconciliation</div>
+          </div>
+          <div>
+            <div class="text-xs text-slate-400 uppercase tracking-wider mb-1">Professional Standing</div>
+            <div class="text-xl sm:text-2xl font-bold text-imperial-gold tabular-nums">NIESV &amp; RSV</div>
+            <div class="text-[11px] text-slate-500">ESVARBON Certified Firm</div>
+          </div>
+        </div>
+
+        <!-- Hero Action Buttons -->
+        <div class="mt-8 flex flex-wrap items-center justify-center gap-3">
+          <button onclick="scrollToTwin()" class="px-5 py-3 rounded-xl bg-neon-emerald hover:bg-emerald-400 text-slate-950 font-mono font-bold text-xs shadow-glow-emerald transition-all flex items-center gap-2">
+            <i class="fa-solid fa-cube"></i>
+            <span>Launch 3D Digital Twin</span>
+          </button>
+          <a href="#valuation-simulator" class="px-5 py-3 rounded-xl bg-slate-900/90 hover:bg-slate-800 text-white border border-white/20 hover:border-neon-emerald/50 font-mono font-semibold text-xs transition-all flex items-center gap-2">
+            <i class="fa-solid fa-calculator text-neon-emerald"></i>
+            <span>Simulate Property Values</span>
+          </a>
+          <button onclick="openVerificationModal()" class="px-5 py-3 rounded-xl bg-slate-900/90 hover:bg-slate-800 text-slate-300 border border-white/10 hover:border-imperial-gold/50 font-mono font-semibold text-xs transition-all flex items-center gap-2">
+            <i class="fa-solid fa-shield-halved text-imperial-gold"></i>
+            <span>Verify Plot / AGIS Due Diligence</span>
+          </button>
+        </div>
+
+        <!-- Interactive Homepage Real Estate Sector Command Tabs -->
+        <div class="mt-12 text-center">
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-900/80 border border-white/10 text-slate-400 text-xs font-mono uppercase tracking-wider mb-3">
+            <i class="fa-solid fa-layer-group text-neon-emerald"></i>
+            <span>Abuja Land &amp; Property Investment Sectors</span>
+          </div>
+          <h3 class="text-white font-raleway font-bold text-lg sm:text-2xl mb-2">
+            Explore Abuja by Asset Class &amp; Development Typology
+          </h3>
+          <p class="text-slate-400 text-xs sm:text-sm max-w-2xl mx-auto mb-6">
+            Click any sector below to inspect live FCTA Master Plan zoning regulations, average price baselines, and statutory title requirements before committing capital.
+          </p>
+
+          <!-- 4 Interactive Sector Tabs -->
+          <div class="inline-flex p-1.5 rounded-2xl bg-slate-950/90 border border-white/10 flex-wrap justify-center gap-1.5 shadow-2xl max-w-full">
+            <button type="button" onclick="selectHomeSector('residential')" id="home-sector-btn-residential" class="home-sector-btn px-4 py-2.5 rounded-xl text-xs font-mono font-semibold transition-all flex items-center gap-2 bg-neon-emerald text-slate-950 shadow-glow-emerald">
+              <i class="fa-solid fa-house-chimney"></i>
+              <span>Residential &amp; Estates</span>
+            </button>
+            <button type="button" onclick="selectHomeSector('commercial')" id="home-sector-btn-commercial" class="home-sector-btn px-4 py-2.5 rounded-xl text-xs font-mono font-semibold transition-all flex items-center gap-2 text-slate-300 hover:text-white hover:bg-white/5">
+              <i class="fa-solid fa-briefcase"></i>
+              <span>Commercial &amp; Plazas</span>
+            </button>
+            <button type="button" onclick="selectHomeSector('industrial')" id="home-sector-btn-industrial" class="home-sector-btn px-4 py-2.5 rounded-xl text-xs font-mono font-semibold transition-all flex items-center gap-2 text-slate-300 hover:text-white hover:bg-white/5">
+              <i class="fa-solid fa-industry"></i>
+              <span>Industrial &amp; Logistics</span>
+            </button>
+            <button type="button" onclick="selectHomeSector('institutional')" id="home-sector-btn-institutional" class="home-sector-btn px-4 py-2.5 rounded-xl text-xs font-mono font-semibold transition-all flex items-center gap-2 text-slate-300 hover:text-white hover:bg-white/5">
+              <i class="fa-solid fa-landmark"></i>
+              <span>Not-for-Profit &amp; Civic</span>
+            </button>
+          </div>
+
+          <!-- Dynamic Sector Live Intelligence Panel -->
+          <div id="home-sector-panel" class="mt-5 p-6 sm:p-7 rounded-2xl glass-panel border border-neon-emerald/30 text-left max-w-4xl mx-auto transition-all shadow-2xl">
+            <!-- Populated dynamically by selectHomeSector() in JS -->
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================================= -->
+  <!-- 1B. INVESTOR GUIDE: WHO WE HELP & HOW WE PROTECT YOU                     -->
+  <!-- ========================================================================= -->
+  <section id="investor-pathways" class="py-14 bg-[#070b19] border-t border-white/10 relative overflow-hidden">
+    <!-- Ambient ambient glow -->
+    <div class="absolute right-0 top-0 w-96 h-96 bg-neon-emerald/5 rounded-full blur-3xl pointer-events-none"></div>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      
+      <!-- Section Header -->
+      <div class="text-center max-w-3xl mx-auto mb-12">
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-neon-emerald/10 border border-neon-emerald/30 text-neon-emerald text-xs font-mono uppercase tracking-wider mb-3">
+          <i class="fa-solid fa-compass"></i>
+          <span>Plain-English Investor Guide</span>
+        </div>
+        <h2 class="font-raleway font-bold text-2xl sm:text-4xl text-white tracking-tight">
+          How We Protect Your Money &amp; Guide Your Investment
+        </h2>
+        <p class="text-slate-300 text-sm sm:text-base mt-3 leading-relaxed">
+          You don't need a surveying degree to invest safely in Abuja. Whether you are living in Nigeria or abroad in the diaspora, here is exactly how our licensed estate surveyors safeguard your capital:
+        </p>
+      </div>
+
+      <!-- 4 Core Investor Personas Grid: Residential, Commercial, Industrial, Not-for-Profit -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        
+        <!-- Card 1: Diaspora & Private Residential Buyers -->
+        <div class="glass-panel p-6 sm:p-7 rounded-2xl border border-white/10 hover:border-neon-emerald/50 transition-all flex flex-col justify-between group relative overflow-hidden">
+          <div class="absolute top-0 right-0 w-28 h-28 bg-neon-emerald/5 rounded-full blur-2xl pointer-events-none"></div>
+          
+          <div>
+            <div class="flex items-center justify-between mb-4">
+              <div class="w-12 h-12 rounded-xl bg-neon-emerald/10 border border-neon-emerald/30 flex items-center justify-center text-neon-emerald text-xl group-hover:scale-110 transition-transform">
+                <i class="fa-solid fa-house-shield"></i>
+              </div>
+              <span class="text-[11px] font-mono font-semibold px-2.5 py-1 rounded-full bg-emerald-500/10 text-emerald-300 border border-emerald-500/20">
+                Zero-Demolition
+              </span>
+            </div>
+
+            <div class="text-xs font-mono text-neon-emerald uppercase tracking-wider mb-1">
+              Private &amp; Diaspora
+            </div>
+            <h3 class="font-raleway font-bold text-lg text-white mb-2.5">
+              Residential Land &amp; Homes
+            </h3>
+            <p class="text-slate-300 text-xs leading-relaxed mb-4">
+              Avoid fake C of O documents, double-allocated plots, or unknowingly buying land marked for FCDA demolition. We physically inspect boundary beacons on-ground and authenticate the official file at AGIS before you transfer payment.
+            </p>
+
+            <ul class="space-y-2 text-xs text-slate-300 border-t border-white/10 pt-4 mb-6">
+              <li class="flex items-start gap-2">
+                <i class="fa-solid fa-check text-neon-emerald mt-0.5 shrink-0"></i>
+                <span><strong>Physical Beacon Check:</strong> GPS verification of concrete boundary beacons.</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <i class="fa-solid fa-check text-neon-emerald mt-0.5 shrink-0"></i>
+                <span><strong>AGIS Title Search:</strong> Confirming genuine ownership and absence of court disputes.</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <i class="fa-solid fa-check text-neon-emerald mt-0.5 shrink-0"></i>
+                <span><strong>Price Benchmark:</strong> Ensuring you never overpay sellers or middlemen.</span>
+              </li>
+            </ul>
+          </div>
+
+          <button onclick="openVerificationModal()" class="w-full py-2.5 px-4 rounded-xl bg-slate-900 hover:bg-slate-800 text-neon-emerald border border-neon-emerald/40 hover:border-neon-emerald text-xs font-mono font-bold transition-all flex items-center justify-center gap-2">
+            <i class="fa-solid fa-shield-halved"></i>
+            <span>Verify Residential Plot</span>
+          </button>
+        </div>
+
+        <!-- Card 2: Property Developers & Commercial Plazas -->
+        <div class="glass-panel p-6 sm:p-7 rounded-2xl border border-white/10 hover:border-electric-blue/50 transition-all flex flex-col justify-between group relative overflow-hidden">
+          <div class="absolute top-0 right-0 w-28 h-28 bg-electric-blue/5 rounded-full blur-2xl pointer-events-none"></div>
+
+          <div>
+            <div class="flex items-center justify-between mb-4">
+              <div class="w-12 h-12 rounded-xl bg-electric-blue/10 border border-electric-blue/30 flex items-center justify-center text-electric-blue text-xl group-hover:scale-110 transition-transform">
+                <i class="fa-solid fa-chart-line"></i>
+              </div>
+              <span class="text-[11px] font-mono font-semibold px-2.5 py-1 rounded-full bg-cyan-500/10 text-cyan-300 border border-cyan-500/20">
+                8.5% – 11% Yield
+              </span>
+            </div>
+
+            <div class="text-xs font-mono text-electric-blue uppercase tracking-wider mb-1">
+              Commercial &amp; Developers
+            </div>
+            <h3 class="font-raleway font-bold text-lg text-white mb-2.5">
+              Office Plazas &amp; Mixed-Use
+            </h3>
+            <p class="text-slate-300 text-xs leading-relaxed mb-4">
+              Developing commercial plazas, retail centers, or residential estates? We calculate realistic building costs, hillside slope construction implications, and anticipated annual tenant rental cash flow across CBD, Wuse II, and Jabi.
+            </p>
+
+            <ul class="space-y-2 text-xs text-slate-300 border-t border-white/10 pt-4 mb-6">
+              <li class="flex items-start gap-2">
+                <i class="fa-solid fa-check text-electric-blue mt-0.5 shrink-0"></i>
+                <span><strong>Feasibility Studies:</strong> Bank-ready business cases for project financing.</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <i class="fa-solid fa-check text-electric-blue mt-0.5 shrink-0"></i>
+                <span><strong>Topography &amp; Slope:</strong> Avoiding costly foundation surprises on rocky ridges.</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <i class="fa-solid fa-check text-electric-blue mt-0.5 shrink-0"></i>
+                <span><strong>Cash-Flow Forecasts:</strong> Projected returns based on current FCT tenant demand.</span>
+              </li>
+            </ul>
+          </div>
+
+          <a href="#valuation-simulator" class="w-full py-2.5 px-4 rounded-xl bg-slate-900 hover:bg-slate-800 text-electric-blue border border-electric-blue/40 hover:border-electric-blue text-xs font-mono font-bold transition-all flex items-center justify-center gap-2">
+            <i class="fa-solid fa-calculator"></i>
+            <span>Simulate Commercial Yields</span>
+          </a>
+        </div>
+
+        <!-- Card 3: Industrial, Warehousing & Rail Logistics -->
+        <div class="glass-panel p-6 sm:p-7 rounded-2xl border border-white/10 hover:border-purple-400/50 transition-all flex flex-col justify-between group relative overflow-hidden">
+          <div class="absolute top-0 right-0 w-28 h-28 bg-purple-500/5 rounded-full blur-2xl pointer-events-none"></div>
+
+          <div>
+            <div class="flex items-center justify-between mb-4">
+              <div class="w-12 h-12 rounded-xl bg-purple-500/10 border border-purple-500/30 flex items-center justify-center text-purple-400 text-xl group-hover:scale-110 transition-transform">
+                <i class="fa-solid fa-industry"></i>
+              </div>
+              <span class="text-[11px] font-mono font-semibold px-2.5 py-1 rounded-full bg-purple-500/10 text-purple-300 border border-purple-500/20">
+                10% – 13% Industrial
+              </span>
+            </div>
+
+            <div class="text-xs font-mono text-purple-400 uppercase tracking-wider mb-1">
+              Industrial &amp; Logistics
+            </div>
+            <h3 class="font-raleway font-bold text-lg text-white mb-2.5">
+              Warehouses, Plants &amp; Rail
+            </h3>
+            <p class="text-slate-300 text-xs leading-relaxed mb-4">
+              Acquiring manufacturing, heavy logistics, or bonded depot land in Idu Industrial Zone, Giri, or the Airport Corridor? We audit 33kV dedicated power grid lines, rail cargo freight sidings, and environmental safeguards (EIA).
+            </p>
+
+            <ul class="space-y-2 text-xs text-slate-300 border-t border-white/10 pt-4 mb-6">
+              <li class="flex items-start gap-2">
+                <i class="fa-solid fa-check text-purple-400 mt-0.5 shrink-0"></i>
+                <span><strong>FCTA Industrial Covenants:</strong> Verifying manufacturing &amp; depot allocation rules.</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <i class="fa-solid fa-check text-purple-400 mt-0.5 shrink-0"></i>
+                <span><strong>Heavy Transit Clearances:</strong> Rail dry port access and heavy axle road links.</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <i class="fa-solid fa-check text-purple-400 mt-0.5 shrink-0"></i>
+                <span><strong>Environmental Safeguards:</strong> Zero-sanction compliance for manufacturing.</span>
+              </li>
+            </ul>
+          </div>
+
+          <button onclick="setSimDistrict('idu'); document.getElementById('valuation-simulator').scrollIntoView({ behavior: 'smooth' });" class="w-full py-2.5 px-4 rounded-xl bg-slate-900 hover:bg-slate-800 text-purple-300 border border-purple-400/40 hover:border-purple-400 text-xs font-mono font-bold transition-all flex items-center justify-center gap-2">
+            <i class="fa-solid fa-calculator"></i>
+            <span>Simulate Idu Industrial Land</span>
+          </button>
+        </div>
+
+        <!-- Card 4: Not-for-Profit, Religious & Civic Campuses -->
+        <div class="glass-panel p-6 sm:p-7 rounded-2xl border border-white/10 hover:border-imperial-gold/50 transition-all flex flex-col justify-between group relative overflow-hidden">
+          <div class="absolute top-0 right-0 w-28 h-28 bg-imperial-gold/5 rounded-full blur-2xl pointer-events-none"></div>
+
+          <div>
+            <div class="flex items-center justify-between mb-4">
+              <div class="w-12 h-12 rounded-xl bg-imperial-gold/10 border border-imperial-gold/30 flex items-center justify-center text-imperial-gold text-xl group-hover:scale-110 transition-transform">
+                <i class="fa-solid fa-landmark"></i>
+              </div>
+              <span class="text-[11px] font-mono font-semibold px-2.5 py-1 rounded-full bg-amber-500/10 text-amber-300 border border-amber-500/20">
+                Civic / Institutional
+              </span>
+            </div>
+
+            <div class="text-xs font-mono text-imperial-gold uppercase tracking-wider mb-1">
+              Not-for-Profit &amp; Civic
+            </div>
+            <h3 class="font-raleway font-bold text-lg text-white mb-2.5">
+              Churches, Schools &amp; NGOs
+            </h3>
+            <p class="text-slate-300 text-xs leading-relaxed mb-4">
+              Securing land for a place of worship, school, university, specialty hospital, or NGO/embassy headquarters? We ensure strict FCTA Master Plan 'Civic/Institutional' zoning compliance to prevent catastrophic demolition or revocation.
+            </p>
+
+            <ul class="space-y-2 text-xs text-slate-300 border-t border-white/10 pt-4 mb-6">
+              <li class="flex items-start gap-2">
+                <i class="fa-solid fa-check text-imperial-gold mt-0.5 shrink-0"></i>
+                <span><strong>Civic Zoning Compliance:</strong> Proving the plot is legally designated for non-profit use.</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <i class="fa-solid fa-check text-imperial-gold mt-0.5 shrink-0"></i>
+                <span><strong>Ground Rent Concessions:</strong> Advising on statutory FCTA non-profit fee waivers.</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <i class="fa-solid fa-check text-imperial-gold mt-0.5 shrink-0"></i>
+                <span><strong>Building Covenant Defense:</strong> Preventing repossession for development delays.</span>
+              </li>
+            </ul>
+          </div>
+
+          <button onclick="openVerificationModal('institutional')" class="w-full py-2.5 px-4 rounded-xl bg-slate-900 hover:bg-slate-800 text-imperial-gold border border-imperial-gold/40 hover:border-imperial-gold text-xs font-mono font-bold transition-all flex items-center justify-center gap-2">
+            <i class="fa-solid fa-shield-halved"></i>
+            <span>Verify Institutional Land</span>
+          </button>
+        </div>
+
+      </div>
+
+      <!-- Quick reassurance banner for non-specialists -->
+      <div class="mt-8 p-4 sm:p-5 rounded-2xl glass-panel border border-neon-emerald/30 flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-full bg-neon-emerald/10 border border-neon-emerald/30 flex items-center justify-center text-neon-emerald text-lg shrink-0">
+            <i class="fa-solid fa-user-shield"></i>
+          </div>
+          <div class="text-xs sm:text-sm text-slate-300">
+            <strong class="text-white font-semibold">Why use a Registered Estate Surveyor instead of an unregulated agent?</strong> 
+            Unregulated agents take commissions on sales regardless of title validity. We are licensed professionals legally liable for ensuring your land title is 100% genuine and safe.
+          </div>
+        </div>
+        <button onclick="openVerificationModal()" class="whitespace-nowrap px-4 py-2 rounded-xl bg-neon-emerald hover:bg-emerald-400 text-slate-950 text-xs font-mono font-bold transition-all shadow-glow-emerald">
+          Book Free 15-Min Title Check
+        </button>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ========================================================================= -->
+  <!-- 2. LIVE 3D SPATIAL CANVAS (ABUJA DIGITAL TWIN)                            -->
+  <!-- ========================================================================= -->
+  <section id="digital-twin" class="relative py-12 border-t border-b border-white/10 bg-[#050811]">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <!-- Section Header -->
+      <div class="text-center max-w-3xl mx-auto mb-12">
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-neon-emerald/10 border border-neon-emerald/30 text-neon-emerald text-xs font-mono uppercase tracking-wider mb-3">
+          <span class="w-2 h-2 rounded-full bg-neon-emerald animate-ping"></span>
+          <span>Real-Time WebGL 3D Spatial Canvas</span>
+        </div>
+        <h2 class="font-raleway font-bold text-2xl sm:text-4xl text-white tracking-tight">
+          Abuja Cadastral Digital Twin
+        </h2>
+        <p class="text-slate-300 text-sm sm:text-base mt-3 leading-relaxed">
+          Interactive procedural WebGL model representing Maitama, the Central Business District (CBD), Guzape Ridge, and Katampe topography with live cadastral telemetry.
+        </p>
+        <div class="mt-4 text-xs font-mono text-neon-emerald inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-neon-emerald/5 border border-neon-emerald/20 text-center">
+          <i class="fa-solid fa-lightbulb text-amber-400"></i>
+          <span><strong>Investor Tip:</strong> Click any district button to compare average land rates per sqm and inspect topography elevation before purchasing hillside plots.</span>
+        </div>
+      </div>
+
+      <!-- Quick district buttons centered above canvas -->
+      <div class="flex justify-center mb-6">
+        <div class="p-1 rounded-lg bg-slate-900/90 border border-white/10 flex flex-wrap items-center justify-center gap-1 text-xs font-mono">
+          <button onclick="focusDistrict('overview')" id="btn-dist-overview" class="dist-btn px-3 py-1.5 rounded-md bg-neon-emerald/20 text-neon-emerald font-semibold border border-neon-emerald/40 transition-all">
+            Overview
+          </button>
+          <button onclick="focusDistrict('maitama')" id="btn-dist-maitama" class="dist-btn px-3 py-1.5 rounded-md text-slate-300 hover:text-white transition-all">
+            Maitama
+          </button>
+          <button onclick="focusDistrict('cbd')" id="btn-dist-cbd" class="dist-btn px-3 py-1.5 rounded-md text-slate-300 hover:text-white transition-all">
+            CBD Abuja
+          </button>
+          <button onclick="focusDistrict('guzape')" id="btn-dist-guzape" class="dist-btn px-3 py-1.5 rounded-md text-slate-300 hover:text-white transition-all">
+            Guzape Ridge
+          </button>
+          <button onclick="focusDistrict('katampe')" id="btn-dist-katampe" class="dist-btn px-3 py-1.5 rounded-md text-slate-300 hover:text-white transition-all">
+            Katampe Ext.
+          </button>
+          <button onclick="focusDistrict('jabi')" id="btn-dist-jabi" class="dist-btn px-3 py-1.5 rounded-md text-slate-300 hover:text-white transition-all">
+            Jabi
+          </button>
+          <button onclick="focusDistrict('idu')" id="btn-dist-idu" class="dist-btn px-3 py-1.5 rounded-md text-slate-300 hover:text-white transition-all">
+            Idu Industrial
+          </button>
+        </div>
+      </div>
+
+      <!-- 3D Canvas Viewport Wrapper -->
+      <div class="relative w-full h-[580px] sm:h-[680px] rounded-2xl overflow-hidden glass-panel border border-white/15 shadow-2xl group">
+        
+        <!-- Scanline Animation Overlay -->
+        <div class="scanline"></div>
+
+        <!-- WebGL Canvas Container with touch-action none for mobile smoothness -->
+        <div id="three-container" class="w-full h-full cursor-grab active:cursor-grabbing" style="touch-action: none;"></div>
+
+        <!-- Canvas Fallback Container for Non-WebGL/Loading State -->
+        <div id="canvas-loading" class="absolute inset-0 bg-[#050811] flex flex-col items-center justify-center pointer-events-none transition-opacity duration-700">
+          <div class="w-12 h-12 rounded-full border-2 border-neon-emerald/20 border-t-neon-emerald animate-spin mb-4"></div>
+          <p class="text-xs font-mono text-slate-400 tracking-wider uppercase">Initializing Abuja Spatial Engine...</p>
+        </div>
+
+        <!-- Floating District Pin Tags in DOM Layer -->
+        <div id="district-tags-layer" class="absolute inset-0 pointer-events-none overflow-hidden">
+          <!-- Dynamic 3D projected pins will be attached here -->
+        </div>
+
+        <!-- TOP HUD Overlay: Live District Telemetry -->
+        <div class="absolute top-4 left-4 right-4 flex flex-wrap items-center justify-between gap-3 pointer-events-none z-10">
+          <div class="glass-panel px-4 py-2.5 rounded-xl border border-white/10 pointer-events-auto flex items-center gap-3">
+            <div class="flex items-center gap-2">
+              <span class="w-2.5 h-2.5 rounded-full bg-neon-emerald animate-pulse"></span>
+              <span id="hud-district-name" class="font-mono font-bold text-sm text-white">Abuja Central Metropole</span>
+            </div>
+            <span class="text-slate-600">|</span>
+            <div class="text-xs font-mono text-slate-300">
+              Avg. Land Value: <span id="hud-land-value" class="text-neon-emerald font-semibold tabular-nums">₦450,000 / sqm</span>
+            </div>
+          </div>
+
+          <div class="flex items-center gap-2 pointer-events-auto">
+            <div class="glass-panel px-3 py-1.5 rounded-lg border border-white/10 text-xs font-mono text-slate-300 flex items-center gap-2">
+              <span class="text-slate-500">RENDER:</span>
+              <span id="fps-counter" class="text-neon-emerald font-bold">60 FPS</span>
+            </div>
+            <button onclick="toggleWireframe()" id="btn-wireframe" class="glass-panel px-3 py-1.5 rounded-lg border border-white/10 hover:border-neon-emerald/50 text-xs font-mono text-slate-300 hover:text-white transition-all flex items-center gap-1.5" title="Toggle Wireframe Shader Mode">
+              <i class="fa-solid fa-vector-square text-neon-emerald"></i>
+              <span id="wireframe-status">Wireframe: OFF</span>
+            </button>
+            <button onclick="toggleLighting()" id="btn-lighting" class="glass-panel px-3 py-1.5 rounded-lg border border-white/10 hover:border-imperial-gold/50 text-xs font-mono text-slate-300 hover:text-white transition-all flex items-center gap-1.5" title="Switch Atmospheric Lighting">
+              <i class="fa-solid fa-moon text-imperial-gold"></i>
+              <span id="lighting-status">Cyber Night</span>
+            </button>
+            <button onclick="toggleAutoRotate()" id="btn-autorotate" class="glass-panel px-3 py-1.5 rounded-lg border border-white/10 hover:border-electric-blue/50 text-xs font-mono text-slate-300 hover:text-white transition-all flex items-center gap-1.5" title="Toggle Camera Auto-Orbit">
+              <i class="fa-solid fa-arrows-rotate text-electric-blue"></i>
+              <span id="autorotate-status">Orbit: ON</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- BOTTOM HUD: Cadastral Specs & Selected Parcel Insight -->
+        <div class="absolute bottom-4 left-4 right-4 flex flex-col sm:flex-row items-start sm:items-end justify-between gap-3 pointer-events-none z-10">
+          <div class="glass-panel p-4 rounded-xl border border-white/10 pointer-events-auto max-w-md w-full shadow-xl">
+            <div class="flex items-center justify-between mb-2">
+              <span class="text-[11px] font-mono uppercase tracking-wider text-slate-400 flex items-center gap-1.5">
+                <span class="w-1.5 h-1.5 rounded-full bg-neon-emerald"></span>
+                AGIS Cadastral Parcel Telemetry
+              </span>
+              <span id="hud-parcel-id" class="text-xs font-mono text-electric-blue bg-electric-blue/10 px-2 py-0.5 rounded border border-electric-blue/30 font-semibold">AGIS-CAD-A00-4491</span>
+            </div>
+            <div class="grid grid-cols-3 gap-2 text-xs font-mono pt-1">
+              <div>
+                <span class="text-slate-500 block text-[10px]">Zone Type</span>
+                <span id="hud-zone-type" class="text-white font-medium">Commercial CBD</span>
+              </div>
+              <div>
+                <span class="text-slate-500 block text-[10px]">Statutory Yield</span>
+                <span id="hud-yield" class="text-neon-emerald font-semibold tabular-nums">8.7% p.a.</span>
+              </div>
+              <div>
+                <span class="text-slate-500 block text-[10px]">RAP Safeguard</span>
+                <span id="hud-rap-risk" class="text-imperial-gold font-semibold">Low (PS5 Tier 1)</span>
+              </div>
+            </div>
+            <div class="mt-2.5 pt-2 border-t border-white/10 text-[11px] text-slate-400 flex items-center justify-between gap-2">
+              <span>Click structures to inspect</span>
+              <button onclick="loadInspectedParcelToSimulator()" class="px-2.5 py-1 rounded bg-neon-emerald/20 hover:bg-neon-emerald/30 text-neon-emerald font-semibold text-[10px] border border-neon-emerald/40 transition-colors flex items-center gap-1">
+                <i class="fa-solid fa-calculator"></i>
+                <span>Load in Simulator</span>
+              </button>
+            </div>
+          </div>
+
+          <div class="glass-panel px-3 py-2 rounded-xl border border-white/10 pointer-events-auto text-[11px] font-mono text-slate-400 flex items-center gap-2">
+            <i class="fa-solid fa-mountain text-imperial-gold"></i>
+            <span>Topography: <strong class="text-slate-200">Aso Rock Granitic Monolith &amp; Ridge</strong></span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================================= -->
+  <!-- 3. INTERACTIVE VALUATION & RAP CALCULATOR SIMULATOR                       -->
+  <!-- ========================================================================= -->
+  <section id="valuation-simulator" class="py-16 bg-[#050811] relative">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <!-- Section Header -->
+      <div class="text-center max-w-3xl mx-auto mb-12">
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-neon-emerald/10 border border-neon-emerald/30 text-neon-emerald text-xs font-mono uppercase tracking-wider mb-3">
+          <i class="fa-solid fa-calculator"></i>
+          <span>Interactive Investment &amp; Valuation Engine</span>
+        </div>
+        <h2 class="font-raleway font-bold text-2xl sm:text-4xl text-white tracking-tight">
+          Abuja Property Valuation &amp; Investment Simulator
+        </h2>
+        <p class="text-slate-300 text-sm sm:text-base mt-3 leading-relaxed">
+          Calculate real-time property values, bank mortgage baselines, expected annual rental returns, and community settlement costs across Abuja's core development zones.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+        
+        <!-- Controls & Parameter Inputs Column (7 Cols) -->
+        <div class="lg:col-span-7 glass-panel p-6 sm:p-8 rounded-2xl border border-white/10 space-y-6">
+          
+          <!-- Top Header Strip -->
+          <div class="flex flex-wrap items-center justify-between gap-3 border-b border-white/10 pb-4">
+            <div class="flex items-center gap-2">
+              <i class="fa-solid fa-sliders text-neon-emerald"></i>
+              <h3 class="font-raleway font-semibold text-lg text-white">Investment &amp; Parcel Parameters</h3>
+            </div>
+            <div class="flex items-center gap-2">
+              <span class="text-[11px] font-mono text-neon-emerald bg-neon-emerald/10 border border-neon-emerald/30 px-2.5 py-0.5 rounded-full flex items-center gap-1">
+                <i class="fa-solid fa-check-circle text-[10px]"></i>
+                <span>Investor Guide Active</span>
+              </span>
+              <button onclick="resetValuationDefaults()" class="text-xs font-mono text-slate-400 hover:text-neon-emerald transition-colors">
+                Reset
+              </button>
+            </div>
+          </div>
+
+          <!-- 1-Click Investment Presets Strip -->
+          <div class="border-b border-white/10 pb-5">
+            <div class="flex items-center justify-between mb-2">
+              <span class="text-xs font-mono text-slate-300 uppercase tracking-wider flex items-center gap-1.5">
+                <i class="fa-solid fa-bolt text-amber-400"></i>
+                <span>1-Click Investment Scenarios</span>
+              </span>
+              <span class="text-[11px] font-mono text-neon-emerald">Quick Auto-Fill</span>
+            </div>
+            <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-2">
+              <button type="button" onclick="applyInvestmentPreset('duplex_guzape')" class="preset-btn p-2.5 rounded-xl border border-white/10 bg-slate-900/60 hover:border-neon-emerald/40 text-left transition-all text-xs font-mono" data-preset="duplex_guzape">
+                <div class="font-bold text-white flex items-center gap-1">🏡 5-Bed Duplex</div>
+                <div class="text-[10px] text-slate-400">Guzape · 1,000 sqm</div>
+              </button>
+              <button type="button" onclick="applyInvestmentPreset('plaza_cbd')" class="preset-btn p-2.5 rounded-xl border border-white/10 bg-slate-900/60 hover:border-neon-emerald/40 text-left transition-all text-xs font-mono" data-preset="plaza_cbd">
+                <div class="font-bold text-white flex items-center gap-1">🏢 Office Plaza</div>
+                <div class="text-[10px] text-slate-400">CBD · 2,500 sqm</div>
+              </button>
+              <button type="button" onclick="applyInvestmentPreset('industrial_idu')" class="preset-btn p-2.5 rounded-xl border border-white/10 bg-slate-900/60 hover:border-purple-400/40 text-left transition-all text-xs font-mono" data-preset="industrial_idu">
+                <div class="font-bold text-white flex items-center gap-1">🏭 Logistics Park</div>
+                <div class="text-[10px] text-purple-300">Idu · 10,000 sqm</div>
+              </button>
+              <button type="button" onclick="applyInvestmentPreset('civic_ngo')" class="preset-btn p-2.5 rounded-xl border border-white/10 bg-slate-900/60 hover:border-imperial-gold/40 text-left transition-all text-xs font-mono" data-preset="civic_ngo">
+                <div class="font-bold text-white flex items-center gap-1">🏛️ Civic / Church</div>
+                <div class="text-[10px] text-amber-300">Maitama · 5,000 sqm</div>
+              </button>
+              <button type="button" onclick="applyInvestmentPreset('estate_katampe')" class="preset-btn p-2.5 rounded-xl border border-white/10 bg-slate-900/60 hover:border-neon-emerald/40 text-left transition-all text-xs font-mono" data-preset="estate_katampe">
+                <div class="font-bold text-white flex items-center gap-1">🏘️ Housing Estate</div>
+                <div class="text-[10px] text-slate-400">Katampe · 15,000 sqm</div>
+              </button>
+              <button type="button" onclick="applyInvestmentPreset('mansion_maitama')" class="preset-btn p-2.5 rounded-xl border border-white/10 bg-slate-900/60 hover:border-neon-emerald/40 text-left transition-all text-xs font-mono" data-preset="mansion_maitama">
+                <div class="font-bold text-white flex items-center gap-1">👑 Diplomatic Crest</div>
+                <div class="text-[10px] text-slate-400">Maitama · 3,500 sqm</div>
+              </button>
+            </div>
+          </div>
+
+          <!-- Parameter 1: District Selection with Live Rate / sqm -->
+          <div>
+            <div class="flex items-center justify-between mb-2.5">
+              <label class="text-xs font-mono text-slate-300 uppercase tracking-wider">
+                1. Select District (AGIS Cadastral Zone)
+              </label>
+              <span class="text-[11px] font-mono text-slate-400">Rates per sqm</span>
+            </div>
+            <div class="grid grid-cols-2 sm:grid-cols-3 gap-2.5">
+              <button type="button" onclick="setSimDistrict('maitama')" class="sim-dist-btn p-3 rounded-xl border border-neon-emerald bg-neon-emerald/10 text-left transition-all" data-dist="maitama">
+                <div class="font-mono font-bold text-sm text-white">Maitama</div>
+                <div class="text-[11px] font-mono text-neon-emerald font-semibold">₦550,000 / sqm</div>
+                <div class="text-[10px] text-slate-400">Zone A05/A06 · Diplomatic</div>
+              </button>
+              <button type="button" onclick="setSimDistrict('cbd')" class="sim-dist-btn p-3 rounded-xl border border-white/10 bg-slate-900/50 text-left hover:border-white/30 transition-all" data-dist="cbd">
+                <div class="font-mono font-bold text-sm text-white">CBD Abuja</div>
+                <div class="text-[11px] font-mono text-electric-blue font-semibold">₦720,000 / sqm</div>
+                <div class="text-[10px] text-slate-400">Zone A00 · Commercial Core</div>
+              </button>
+              <button type="button" onclick="setSimDistrict('guzape')" class="sim-dist-btn p-3 rounded-xl border border-white/10 bg-slate-900/50 text-left hover:border-white/30 transition-all" data-dist="guzape">
+                <div class="font-mono font-bold text-sm text-white">Guzape Ridge</div>
+                <div class="text-[11px] font-mono text-amber-300 font-semibold">₦340,000 / sqm</div>
+                <div class="text-[10px] text-slate-400">Zone A09 · Luxury Crest</div>
+              </button>
+              <button type="button" onclick="setSimDistrict('katampe')" class="sim-dist-btn p-3 rounded-xl border border-white/10 bg-slate-900/50 text-left hover:border-white/30 transition-all" data-dist="katampe">
+                <div class="font-mono font-bold text-sm text-white">Katampe Ext.</div>
+                <div class="text-[11px] font-mono text-emerald-400 font-semibold">₦240,000 / sqm</div>
+                <div class="text-[10px] text-slate-400">Zone B19 · Hillside Zone</div>
+              </button>
+              <button type="button" onclick="setSimDistrict('jabi')" class="sim-dist-btn p-3 rounded-xl border border-white/10 bg-slate-900/50 text-left hover:border-white/30 transition-all" data-dist="jabi">
+                <div class="font-mono font-bold text-sm text-white">Jabi Waterfront</div>
+                <div class="text-[11px] font-mono text-cyan-300 font-semibold">₦380,000 / sqm</div>
+                <div class="text-[10px] text-slate-400">Zone B04 · Mixed-Use Commercial</div>
+              </button>
+              <button type="button" onclick="setSimDistrict('idu')" class="sim-dist-btn p-3 rounded-xl border border-white/10 bg-slate-900/50 text-left hover:border-white/30 transition-all" data-dist="idu">
+                <div class="font-mono font-bold text-sm text-white">Idu Corridor</div>
+                <div class="text-[11px] font-mono text-purple-300 font-semibold">₦95,000 / sqm</div>
+                <div class="text-[10px] text-slate-400">Zone IND · Logistics &amp; Rail</div>
+              </button>
+            </div>
+          </div>
+
+          <!-- Parameter 2: Land Area (Slider + Quick Buttons) -->
+          <div>
+            <div class="flex items-center justify-between mb-2">
+              <label class="text-xs font-mono text-slate-300 uppercase tracking-wider">
+                2. Land Parcel Extent (sqm)
+              </label>
+              <span class="text-sm font-mono font-bold text-neon-emerald tabular-nums">
+                <span id="slider-area-val">2,500</span> sqm
+              </span>
+            </div>
+            <input type="range" id="input-land-area" min="500" max="50000" step="250" value="2500" oninput="updateValuationCalculation()" class="w-full mb-3" />
+            <div class="flex flex-wrap gap-2 text-xs font-mono">
+              <button type="button" onclick="setAreaPreset(1000)" class="px-2.5 py-1 rounded bg-slate-800/80 hover:bg-slate-700 text-slate-300 border border-white/10">1,000 sqm (Plot)</button>
+              <button type="button" onclick="setAreaPreset(2500)" class="px-2.5 py-1 rounded bg-slate-800/80 hover:bg-slate-700 text-slate-300 border border-white/10">2,500 sqm (Mansion)</button>
+              <button type="button" onclick="setAreaPreset(10000)" class="px-2.5 py-1 rounded bg-slate-800/80 hover:bg-slate-700 text-slate-300 border border-white/10">10,000 sqm (1 Hectare)</button>
+              <button type="button" onclick="setAreaPreset(35000)" class="px-2.5 py-1 rounded bg-slate-800/80 hover:bg-slate-700 text-slate-300 border border-white/10">35,000 sqm (Corridor)</button>
+            </div>
+          </div>
+
+          <!-- Parameter 3: Development Typology -->
+          <div>
+            <label class="block text-xs font-mono text-slate-300 uppercase tracking-wider mb-2">
+              3. Proposed Typology &amp; Asset Classification
+            </label>
+            <select id="select-dev-type" onchange="updateValuationCalculation()" class="w-full bg-slate-900 border border-white/15 rounded-xl px-4 py-3 text-sm text-slate-200 focus:outline-none focus:border-neon-emerald font-inter">
+              <option value="residential" selected>Ultra-Luxury Multi-Family / Diplomatic Residence</option>
+              <option value="commercial">Grade-A Corporate Headquarters / Commercial Hub</option>
+              <option value="industrial">Heavy Logistics / Manufacturing &amp; Bonded Terminal</option>
+              <option value="institutional_nfp">Not-for-Profit / Institutional / Church / Mosque / School / Hospital Campus</option>
+              <option value="infrastructure">Federal Highway / Rail Right-of-Way Corridor</option>
+              <option value="mixed_use">Smart City Mixed-Use Innovation Precinct</option>
+            </select>
+          </div>
+
+          <!-- Parameter 4: Title Document Security & RAP Parameters -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+              <div class="flex items-center justify-between mb-2">
+                <label class="block text-xs font-mono text-slate-300 uppercase tracking-wider">
+                  4. Statutory Title Status
+                </label>
+                <span class="text-[10px] font-mono text-neon-emerald">Legal Security</span>
+              </div>
+              <select id="select-title-status" onchange="updateValuationCalculation()" class="w-full bg-slate-900 border border-white/15 rounded-xl px-3 py-2.5 text-xs text-slate-200 focus:outline-none focus:border-neon-emerald font-inter">
+                <option value="cof_o" selected>Certificate of Occupancy (C of O) · Highest Security</option>
+                <option value="r_of_o">Right of Occupancy (R of O) · Pending Regularization</option>
+                <option value="fcda_alloc">FCDA Ministerial Allocation Letter · Pre-Regularized</option>
+                <option value="customary">Customary Village Excision · High Safeguard Need</option>
+              </select>
+              <div id="title-plain-help" class="text-[11px] text-slate-300 mt-2 p-2 rounded-lg bg-slate-900/90 border border-white/10 flex items-start gap-1.5 leading-snug">
+                <i class="fa-solid fa-circle-check text-neon-emerald mt-0.5 shrink-0"></i>
+                <span><strong>C of O:</strong> The gold standard title in Nigeria. Recognized by all banks for loans and lowest legal risk.</span>
+              </div>
+            </div>
+
+            <div>
+              <div class="flex items-center justify-between mb-2">
+                <label class="block text-xs font-mono text-slate-300 uppercase tracking-wider">
+                  5. Native Claims (RAP)
+                </label>
+                <span class="text-[10px] font-mono text-imperial-gold">Peaceful Possession</span>
+              </div>
+              <input type="number" id="input-pap-count" min="0" max="1500" value="0" oninput="updateValuationCalculation()" class="w-full bg-slate-900 border border-white/15 rounded-xl px-3 py-2 text-xs font-mono text-slate-200 focus:outline-none focus:border-neon-emerald" />
+              <div class="flex gap-1.5 mt-2">
+                <button type="button" onclick="setPapPreset(0)" class="flex-1 py-1 rounded bg-slate-800 hover:bg-slate-700 text-[10px] font-mono text-slate-300 hover:text-white">0 (Clean Plot)</button>
+                <button type="button" onclick="setPapPreset(5)" class="flex-1 py-1 rounded bg-slate-800 hover:bg-slate-700 text-[10px] font-mono text-slate-300 hover:text-white">5 (Border)</button>
+                <button type="button" onclick="setPapPreset(25)" class="flex-1 py-1 rounded bg-slate-800 hover:bg-slate-700 text-[10px] font-mono text-slate-300 hover:text-white">25 (Village Area)</button>
+              </div>
+              <div class="text-[10px] text-slate-400 mt-1.5 leading-snug">
+                Displaced native families/farms requiring compensation before building.
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Calculated Real-Time Valuation Summary (5 Cols) -->
+        <div class="lg:col-span-5 space-y-6">
+          <div class="glass-panel p-6 sm:p-8 rounded-2xl border border-neon-emerald/30 relative overflow-hidden shadow-glow-emerald/10">
+            <div class="absolute -right-10 -bottom-10 w-44 h-44 bg-neon-emerald/5 rounded-full blur-3xl pointer-events-none"></div>
+
+            <!-- Header & Currency Toggle -->
+            <div class="flex items-center justify-between gap-2 mb-2">
+              <span class="text-xs font-mono text-neon-emerald uppercase tracking-wider">Open Market Valuation (OMV)</span>
+              
+              <!-- Currency Toggle -->
+              <div class="p-0.5 rounded-lg bg-slate-900 border border-white/15 flex items-center text-[10px] font-mono">
+                <button type="button" onclick="setCurrency('NGN')" class="curr-btn px-2 py-0.5 rounded bg-neon-emerald text-slate-950 font-bold transition-all" data-curr="NGN">₦ NGN</button>
+                <button type="button" onclick="setCurrency('USD')" class="curr-btn px-2 py-0.5 rounded text-slate-300 hover:text-white transition-all" data-curr="USD">$ USD</button>
+                <button type="button" onclick="setCurrency('GBP')" class="curr-btn px-2 py-0.5 rounded text-slate-300 hover:text-white transition-all" data-curr="GBP">£ GBP</button>
+              </div>
+            </div>
+            
+            <div id="out-omv-naira" class="font-mono font-bold text-3xl sm:text-4xl text-white tracking-tight tabular-nums mb-1">
+              ₦1,375,000,000
+            </div>
+            <div id="out-omv-words" class="text-xs font-mono text-slate-400 mb-2">
+              One Billion, Three Hundred &amp; Seventy-Five Million Naira
+            </div>
+
+            <!-- Plain-English Investor Explanation Banner -->
+            <div class="p-2.5 rounded-lg bg-neon-emerald/10 border border-neon-emerald/20 text-[11px] text-slate-200 flex items-center gap-2 mb-4">
+              <i class="fa-solid fa-circle-info text-neon-emerald shrink-0"></i>
+              <span><strong>Investor Note:</strong> Fair market transaction price based on certified AGIS cadastral comparables.</span>
+            </div>
+
+            <!-- Metric Split Grid with Investor Cash Flow & Highlights -->
+            <div class="space-y-3 border-t border-b border-white/10 py-4 text-xs font-mono">
+              <div>
+                <div class="flex items-center justify-between">
+                  <span class="text-slate-400">Forced Sale Value (FSV):</span>
+                  <span id="out-fsv-naira" class="text-white font-bold tabular-nums">₦1,031,250,000</span>
+                </div>
+                <div class="text-[10px] text-slate-400 text-right">~75% baseline Nigerian banks use to approve property loans</div>
+              </div>
+
+              <div>
+                <div class="flex items-center justify-between">
+                  <span class="text-slate-400">Statutory Land Rate:</span>
+                  <span id="out-sqm-rate" class="text-electric-blue tabular-nums font-semibold">₦550,000 / sqm</span>
+                </div>
+                <div class="text-[10px] text-slate-400 text-right">Official benchmark land price per square meter</div>
+              </div>
+
+              <!-- Annual Cash Flow Highlight Card -->
+              <div class="p-2.5 rounded-xl bg-emerald-500/10 border border-emerald-500/20 space-y-1">
+                <div class="flex items-center justify-between">
+                  <span class="text-emerald-300 font-semibold">Est. Annual Rent Income:</span>
+                  <span id="out-annual-rent" class="text-neon-emerald font-bold tabular-nums">₦107,250,000 / yr</span>
+                </div>
+                <div class="flex items-center justify-between text-[10px] text-slate-300 pt-0.5">
+                  <span>Gross Rental Yield: <strong id="out-yield-percent" class="text-white">7.8% p.a.</strong></span>
+                  <span class="text-emerald-400">10-Yr Capital Growth: <strong>+165% to +190%</strong></span>
+                </div>
+              </div>
+
+              <div>
+                <div class="flex items-center justify-between">
+                  <span class="text-slate-400">Statutory Appraisal Fee:</span>
+                  <span id="out-appraisal-fee" class="text-imperial-gold font-medium tabular-nums">₦16,250,000</span>
+                </div>
+                <div class="text-[10px] text-slate-400 text-right">Regulated NIESV scale fee for bank-certified seal</div>
+              </div>
+            </div>
+
+            <!-- RAP Social Safeguards Matrix -->
+            <div class="mt-4 pt-1">
+              <div class="flex items-center justify-between mb-2">
+                <span class="text-xs font-mono text-slate-300 uppercase tracking-wider">
+                  Community RAP Resettlement Fund
+                </span>
+                <span id="out-rap-badge" class="text-[11px] font-mono px-2 py-0.5 rounded font-semibold bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">
+                  Clean Plot · Zero Risk
+                </span>
+              </div>
+              
+              <div class="p-3 rounded-xl bg-slate-900/80 border border-white/10 space-y-1 text-xs font-mono">
+                <div class="flex items-center justify-between">
+                  <span class="text-slate-400">Livelihood Settlement Reserve:</span>
+                  <span id="out-rap-compensation" class="text-imperial-gold font-bold tabular-nums">₦0</span>
+                </div>
+                <div class="text-[10px] text-slate-400">
+                  Fund to amicably resolve indigene claims under World Bank ESS5 standards.
+                </div>
+              </div>
+            </div>
+
+            <!-- Action Buttons with WhatsApp Sharing -->
+            <div class="mt-5 space-y-2">
+              <button onclick="openExportModal()" class="w-full py-3 px-4 rounded-xl bg-neon-emerald hover:bg-emerald-400 text-slate-950 font-mono font-bold text-xs shadow-glow-emerald transition-all flex items-center justify-center gap-2">
+                <i class="fa-solid fa-file-contract"></i>
+                <span>Generate Executive Valuation Brief</span>
+              </button>
+              
+              <div class="grid grid-cols-2 gap-2">
+                <button onclick="shareValuationOnWhatsApp()" class="py-2.5 px-3 rounded-xl bg-emerald-700 hover:bg-emerald-600 text-white font-mono font-bold text-xs transition-all flex items-center justify-center gap-1.5">
+                  <i class="fa-brands fa-whatsapp text-sm"></i>
+                  <span>Share on WhatsApp</span>
+                </button>
+                <button onclick="openVerificationModal()" class="py-2.5 px-3 rounded-xl bg-slate-900 hover:bg-slate-800 text-neon-emerald border border-neon-emerald/40 hover:border-neon-emerald font-mono font-bold text-xs transition-all flex items-center justify-center gap-1.5">
+                  <i class="fa-solid fa-shield-halved"></i>
+                  <span>Verify Plot at AGIS</span>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Statutory Notice -->
+          <div class="p-4 rounded-xl glass-panel border border-white/10 text-[11px] text-slate-400 space-y-1">
+            <div class="font-mono text-slate-300 font-semibold flex items-center gap-1.5">
+              <i class="fa-solid fa-shield-halved text-neon-emerald"></i>
+              Statutory Certification Notice
+            </div>
+            <p>
+              Formal asset valuation reports issued by Emmanuel Nwanjiobi &amp; Co. comply strictly with the Valuation Standards and Guidance Notes of the Nigerian Institution of Estate Surveyors and Valuers (NIESV) and ESVARBON regulatory statutes.
+            </p>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================================= -->
+  <!-- 3B. ABUJA PROPERTY INVESTOR SAFETY & DUE DILIGENCE GUIDE                  -->
+  <!-- ========================================================================= -->
+  <section id="safety-checklist" class="py-16 bg-[#060a18] border-t border-white/10 relative overflow-hidden">
+    <div class="absolute left-0 bottom-0 w-96 h-96 bg-neon-emerald/5 rounded-full blur-3xl pointer-events-none"></div>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      
+      <!-- Section Header -->
+      <div class="text-center max-w-3xl mx-auto mb-12">
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-neon-emerald/10 border border-neon-emerald/30 text-neon-emerald text-xs font-mono uppercase tracking-wider mb-3">
+          <i class="fa-solid fa-shield-halved"></i>
+          <span>Buyer Protection &amp; Risk Elimination</span>
+        </div>
+        <h2 class="font-raleway font-bold text-2xl sm:text-4xl text-white tracking-tight">
+          The 4-Step Due Diligence Checklist Before You Buy Land in Abuja
+        </h2>
+        <p class="text-slate-300 text-sm sm:text-base mt-3 leading-relaxed">
+          Never transfer funds to a private seller or commission agent until these 4 statutory checks are completed by a licensed Estate Surveyor &amp; Valuer:
+        </p>
+      </div>
+
+      <!-- 4 Step Cards Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        
+        <!-- Step 1 -->
+        <div class="glass-panel p-6 rounded-2xl border border-white/10 hover:border-neon-emerald/40 transition-all flex flex-col justify-between group">
+          <div>
+            <div class="w-12 h-12 rounded-xl bg-neon-emerald/10 border border-neon-emerald/30 flex items-center justify-center text-neon-emerald text-xl mb-4 group-hover:scale-105 transition-transform">
+              <i class="fa-solid fa-location-crosshairs"></i>
+            </div>
+            <div class="text-[11px] font-mono text-neon-emerald font-semibold uppercase tracking-wider mb-1">
+              Step 1 · Physical Survey
+            </div>
+            <h3 class="font-raleway font-bold text-base text-white mb-2">
+              Physical Beacon Verification
+            </h3>
+            <p class="text-xs text-slate-300 leading-relaxed mb-3">
+              <strong class="text-white">The Scam Avoided:</strong> Sellers frequently show buyers a flat, tarred-road plot, while the documents actually belong to a rocky ravine 3km away.
+            </p>
+            <p class="text-xs text-slate-400 leading-relaxed">
+              <strong class="text-neon-emerald">Our Action:</strong> We deploy GPS surveying equipment to physically locate the concrete beacons (e.g. PB 4092) and match them precisely to FCDA satellite boundary coordinates.
+            </p>
+          </div>
+          <div class="mt-4 pt-3 border-t border-white/10 text-[11px] font-mono text-slate-400 flex items-center gap-1.5">
+            <i class="fa-solid fa-circle-check text-neon-emerald"></i>
+            <span>Prevents Wrong-Plot Fraud</span>
+          </div>
+        </div>
+
+        <!-- Step 2 -->
+        <div class="glass-panel p-6 rounded-2xl border border-white/10 hover:border-electric-blue/40 transition-all flex flex-col justify-between group">
+          <div>
+            <div class="w-12 h-12 rounded-xl bg-electric-blue/10 border border-electric-blue/30 flex items-center justify-center text-electric-blue text-xl mb-4 group-hover:scale-105 transition-transform">
+              <i class="fa-solid fa-file-shield"></i>
+            </div>
+            <div class="text-[11px] font-mono text-electric-blue font-semibold uppercase tracking-wider mb-1">
+              Step 2 · AGIS Search
+            </div>
+            <h3 class="font-raleway font-bold text-base text-white mb-2">
+              AGIS Legal Title &amp; Lien Check
+            </h3>
+            <p class="text-xs text-slate-300 leading-relaxed mb-3">
+              <strong class="text-white">The Scam Avoided:</strong> Buying land that has been pledged as bank loan collateral, forged papers, or disputed by multiple buyers in court.
+            </p>
+            <p class="text-xs text-slate-400 leading-relaxed">
+              <strong class="text-electric-blue">Our Action:</strong> We conduct a formal title search at Abuja Geographic Information Systems (AGIS) to verify the registered name, recertification status, and court caveats.
+            </p>
+          </div>
+          <div class="mt-4 pt-3 border-t border-white/10 text-[11px] font-mono text-slate-400 flex items-center gap-1.5">
+            <i class="fa-solid fa-circle-check text-electric-blue"></i>
+            <span>Confirms Clean Ownership</span>
+          </div>
+        </div>
+
+        <!-- Step 3 -->
+        <div class="glass-panel p-6 rounded-2xl border border-white/10 hover:border-rose-400/40 transition-all flex flex-col justify-between group">
+          <div>
+            <div class="w-12 h-12 rounded-xl bg-rose-500/10 border border-rose-500/30 flex items-center justify-center text-rose-400 text-xl mb-4 group-hover:scale-105 transition-transform">
+              <i class="fa-solid fa-triangle-exclamation"></i>
+            </div>
+            <div class="text-[11px] font-mono text-rose-400 font-semibold uppercase tracking-wider mb-1">
+              Step 3 · Demolition Audit
+            </div>
+            <h3 class="font-raleway font-bold text-base text-white mb-2">
+              Zoning &amp; Green Belt Clearance
+            </h3>
+            <p class="text-xs text-slate-300 leading-relaxed mb-3">
+              <strong class="text-white">The Danger Avoided:</strong> Buildings marked with red 'X' and demolished by FCDA Development Control because the plot sits on flood plains or transit roads.
+            </p>
+            <p class="text-xs text-slate-400 leading-relaxed">
+              <strong class="text-rose-400">Our Action:</strong> We cross-check the Master Plan to confirm the plot is not located on a utility easement, high-tension power corridor, or nature conservation belt.
+            </p>
+          </div>
+          <div class="mt-4 pt-3 border-t border-white/10 text-[11px] font-mono text-slate-400 flex items-center gap-1.5">
+            <i class="fa-solid fa-circle-check text-rose-400"></i>
+            <span>Eliminates Demolition Risk</span>
+          </div>
+        </div>
+
+        <!-- Step 4 -->
+        <div class="glass-panel p-6 rounded-2xl border border-white/10 hover:border-imperial-gold/40 transition-all flex flex-col justify-between group">
+          <div>
+            <div class="w-12 h-12 rounded-xl bg-imperial-gold/10 border border-imperial-gold/30 flex items-center justify-center text-imperial-gold text-xl mb-4 group-hover:scale-105 transition-transform">
+              <i class="fa-solid fa-stamp"></i>
+            </div>
+            <div class="text-[11px] font-mono text-imperial-gold font-semibold uppercase tracking-wider mb-1">
+              Step 4 · Certified Valuation
+            </div>
+            <h3 class="font-raleway font-bold text-base text-white mb-2">
+              ESVARBON Valuation Report
+            </h3>
+            <p class="text-xs text-slate-300 leading-relaxed mb-3">
+              <strong class="text-white">The Cost Avoided:</strong> Overpaying inflated asking prices fabricated by commission-hungry informal agents by 25% to 50%.
+            </p>
+            <p class="text-xs text-slate-400 leading-relaxed">
+              <strong class="text-imperial-gold">Our Action:</strong> We provide an independent, professional Valuation Certificate stating Open Market Value (OMV) and Forced Sale Value (FSV) recognized by banks.
+            </p>
+          </div>
+          <div class="mt-4 pt-3 border-t border-white/10 text-[11px] font-mono text-slate-400 flex items-center gap-1.5">
+            <i class="fa-solid fa-circle-check text-imperial-gold"></i>
+            <span>Secures Bank Loan Standing</span>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Action Card Callout -->
+      <div class="mt-12 p-6 sm:p-8 rounded-3xl glass-panel border border-neon-emerald/30 bg-gradient-to-r from-neon-emerald/5 via-slate-900/60 to-transparent flex flex-col items-center justify-center text-center gap-6 max-w-4xl mx-auto">
+        <div class="space-y-2 max-w-2xl mx-auto text-center">
+          <div class="inline-flex items-center gap-1.5 text-xs font-mono text-neon-emerald">
+            <i class="fa-solid fa-bolt"></i>
+            <span>Fast 24 to 48-Hour Turnaround</span>
+          </div>
+          <h3 class="font-raleway font-bold text-xl sm:text-2xl text-white">
+            Have a Plot or Property in Abuja You Want to Buy?
+          </h3>
+          <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">
+            Do not wire any deposit until our licensed surveyors have verified the beacons and confirmed the AGIS file. Submit your plot number and district for a confidential preliminary check.
+          </p>
+        </div>
+        <div class="flex flex-col sm:flex-row items-center justify-center gap-2.5 w-full sm:w-auto">
+          <button onclick="openVerificationModal()" class="w-full sm:w-auto px-5 py-3 rounded-xl bg-neon-emerald hover:bg-emerald-400 text-slate-950 font-mono font-bold text-xs shadow-glow-emerald transition-all flex items-center justify-center gap-2">
+            <i class="fa-solid fa-shield-halved"></i>
+            <span>Start Due Diligence Check</span>
+          </button>
+          <a href="tel:+2348060820365" class="w-full sm:w-auto px-4 py-3 rounded-xl bg-slate-900 hover:bg-slate-800 text-slate-200 border border-white/10 text-xs font-mono transition-all flex items-center justify-center gap-2">
+            <i class="fa-solid fa-phone text-neon-emerald"></i>
+            <span>Call +234 8060 820 365</span>
+          </a>
+          <a href="https://wa.me/2348060820365?text=Hello%20Emmanuel%20Nwanjiobi%20%26%20Co.,%20I%20would%20like%20to%20request%20a%20property%20due%20diligence%20check%20in%20Abuja." target="_blank" rel="noopener noreferrer" class="w-full sm:w-auto px-4 py-3 rounded-xl bg-emerald-700 hover:bg-emerald-600 text-white text-xs font-mono transition-all flex items-center justify-center gap-2">
+            <i class="fa-brands fa-whatsapp text-sm"></i>
+            <span>WhatsApp</span>
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ========================================================================= -->
+  <!-- 4. STRATEGIC ANALYSIS & CORPORATE FEATURES                                -->
+  <!-- ========================================================================= -->
+  <section id="strategic-analysis" class="py-16 bg-[#050811] border-t border-white/10">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <!-- Section Header -->
+      <div class="text-center max-w-3xl mx-auto mb-12">
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-neon-emerald/10 border border-neon-emerald/30 text-neon-emerald text-xs font-mono uppercase tracking-wider mb-3">
+          <i class="fa-solid fa-chart-pie"></i>
+          <span>Strategic Institutional Benchmark</span>
+        </div>
+        <h2 class="font-raleway font-bold text-2xl sm:text-4xl text-white tracking-tight">
+          Why Modern Capital Demands 3D Spatial Intelligence
+        </h2>
+        <p class="text-slate-300 text-sm sm:text-base mt-3 leading-relaxed">
+          Traditional estate surveying relies on fragmented static PDFs, outdated paper cadastral overlays, and post-facto compensation disputes. Emmanuel Nwanjiobi &amp; Co. bridges institutional valuation with real-time 3D geospatial digital twins.
+        </p>
+      </div>
+
+      <!-- Comparison Grid Matrix -->
+      <div class="overflow-x-auto pb-4">
+        <table class="w-full text-left border-collapse glass-panel rounded-2xl border border-white/10 overflow-hidden text-xs sm:text-sm">
+          <thead>
+            <tr class="border-b border-white/10 bg-slate-900/80 font-mono text-slate-300">
+              <th class="p-4 sm:p-5 font-semibold text-slate-400 uppercase tracking-wider text-xs">Valuation &amp; RAP Dimension</th>
+              <th class="p-4 sm:p-5 font-semibold text-slate-400">Legacy Nigerian Surveying Practices</th>
+              <th class="p-4 sm:p-5 font-bold text-neon-emerald bg-neon-emerald/5">
+                Emmanuel Nwanjiobi &amp; Co. (3D WebGL Spatial Twin)
+              </th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-white/5 font-inter text-slate-300">
+            <tr class="hover:bg-white/[0.02] transition-colors">
+              <td class="p-4 sm:p-5 font-semibold text-white">Cadastral &amp; Topographical Precision</td>
+              <td class="p-4 sm:p-5 text-slate-400">Manual 2D boundary sketches with delayed beacon verification.</td>
+              <td class="p-4 sm:p-5 bg-neon-emerald/[0.03] text-white font-medium">
+                <span class="text-neon-emerald font-bold mr-1.5"><i class="fa-solid fa-check"></i></span>
+                Centimeter-level GIS/Lidar elevation modeling &amp; 3D terrain slope analysis.
+              </td>
+            </tr>
+            <tr class="hover:bg-white/[0.02] transition-colors">
+              <td class="p-4 sm:p-5 font-semibold text-white">Resettlement Action Planning (RAP)</td>
+              <td class="p-4 sm:p-5 text-slate-400">Reactive enumeration leading to community injunctions and project halts.</td>
+              <td class="p-4 sm:p-5 bg-neon-emerald/[0.03] text-white font-medium">
+                <span class="text-neon-emerald font-bold mr-1.5"><i class="fa-solid fa-check"></i></span>
+                World Bank ESS5 &amp; IFC PS5 aligned socio-economic mapping and budget modeling.
+              </td>
+            </tr>
+            <tr class="hover:bg-white/[0.02] transition-colors">
+              <td class="p-4 sm:p-5 font-semibold text-white">Asset Valuation Methodology</td>
+              <td class="p-4 sm:p-5 text-slate-400">Static paper dossiers with subjective comparables and delayed updates.</td>
+              <td class="p-4 sm:p-5 bg-neon-emerald/[0.03] text-white font-medium">
+                <span class="text-neon-emerald font-bold mr-1.5"><i class="fa-solid fa-check"></i></span>
+                Dynamic DCF financial engine, statutory yield tracking, and FCTA transaction telemetry.
+              </td>
+            </tr>
+            <tr class="hover:bg-white/[0.02] transition-colors">
+              <td class="p-4 sm:p-5 font-semibold text-white">Institutional &amp; Investor Scrutiny</td>
+              <td class="p-4 sm:p-5 text-slate-400">High friction during syndicated bank audits and sovereign guarantee reviews.</td>
+              <td class="p-4 sm:p-5 bg-neon-emerald/[0.03] text-white font-medium">
+                <span class="text-neon-emerald font-bold mr-1.5"><i class="fa-solid fa-check"></i></span>
+                Interactive spatial digital twin for seamless board presentations &amp; multilateral sign-off.
+              </td>
+            </tr>
+            <tr class="hover:bg-white/[0.02] transition-colors">
+              <td class="p-4 sm:p-5 font-semibold text-white">Multi-Sector Project Delivery</td>
+              <td class="p-4 sm:p-5 text-slate-400">Confined to isolated residential and commercial appraisals.</td>
+              <td class="p-4 sm:p-5 bg-neon-emerald/[0.03] text-white font-medium">
+                <span class="text-neon-emerald font-bold mr-1.5"><i class="fa-solid fa-check"></i></span>
+                Executive directorship track record across national energy grids, highway corridors, mass housing, and rail infrastructure.
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ========================================================================= -->
+  <!-- 5. PROJECT EXPERIENCE & INSTITUTIONAL LEADERSHIP SECTION                  -->
+  <!-- ========================================================================= -->
+  <section id="project-experience" class="py-16 bg-[#050811] relative overflow-hidden">
+    <!-- Ambient glow backdrop -->
+    <div class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[350px] bg-gradient-to-r from-imperial-gold/10 via-neon-emerald/5 to-transparent rounded-full blur-3xl pointer-events-none"></div>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      
+      <!-- Section Header -->
+      <div class="text-center max-w-3xl mx-auto mb-12">
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-imperial-gold/10 border border-imperial-gold/30 text-imperial-gold text-xs font-mono uppercase tracking-wider mb-3">
+          <i class="fa-solid fa-briefcase text-imperial-gold"></i>
+          <span>Institutional Leadership &amp; Track Record</span>
+        </div>
+        <h2 class="font-raleway font-bold text-2xl sm:text-4xl text-white tracking-tight">
+          Major Infrastructure Leadership &amp; Project Experience
+        </h2>
+        <p class="text-slate-300 text-sm sm:text-base mt-3 leading-relaxed">
+          Executive leadership in national power transmission grids, federal highway concessions, and urban capital projects delivered under World Bank ESS5 and IFC Performance Standard 5.
+        </p>
+      </div>
+
+      <!-- Premium Leadership Banner Card -->
+      <div class="glass-panel rounded-3xl border border-imperial-gold/30 p-8 sm:p-12 relative overflow-hidden shadow-2xl">
+        <div class="space-y-6">
+
+          <div class="text-center max-w-4xl mx-auto space-y-4">
+            <h3 class="font-raleway font-bold text-2xl sm:text-3xl text-white leading-tight tracking-tight">
+              Emmanuel Nwanjiobi: <br />
+              <span class="text-transparent bg-clip-text bg-gradient-to-r from-imperial-gold via-amber-300 to-neon-emerald">
+                Directorship Leadership &amp; Infrastructure Track Record
+              </span>
+            </h3>
+
+            <p class="text-slate-300 text-sm sm:text-base leading-relaxed">
+              As Principal Partner of Emmanuel Nwanjiobi &amp; Co. and Executive Director of Resettlement Planning, Implementation &amp; Social Safeguards at PMG Nigeria, Emmanuel Nwanjiobi brings premier institutional leadership across Nigeria's energy, transportation, and urban infrastructure landscape. With specialized directorship in Environmental and Social Safeguards, Resettlement Action Planning (RAP), Right-of-Way acquisition, and non-depreciated Full Replacement Value (FRV) asset audits, he directs multi-disciplinary teams in executing statutory appraisals and socio-economic restoration programs aligned with World Bank ESS5 and IFC Performance Standard 5.
+            </p>
+          </div>
+
+          <div class="p-4 rounded-xl bg-slate-900/90 border border-neon-emerald/30 text-xs font-mono text-slate-300 space-y-1.5 max-w-4xl mx-auto">
+            <div class="text-neon-emerald font-semibold uppercase tracking-wider text-[11px] flex items-center justify-center gap-1.5">
+              <i class="fa-solid fa-scale-balanced"></i>
+              <span>Safeguards &amp; Full Replacement Value (FRV) Core Pillars</span>
+            </div>
+            <p class="text-slate-400 text-center">
+              Specialized in valuing lost assets at their non-depreciated <strong>Full Replacement Value (FRV)</strong>, orchestrating <strong>Livelihood Restoration</strong> for vulnerable project-affected communities, facilitating transparent consultations, and implementing accessible <strong>Grievance Redress Mechanisms (GRM)</strong> aligned with World Bank ESS5 and IFC Performance Standard 5.
+            </p>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-1 max-w-5xl mx-auto">
+            <div class="p-4 rounded-xl bg-slate-900/80 border border-white/10">
+              <div class="text-imperial-gold text-lg mb-1"><i class="fa-solid fa-bolt"></i></div>
+              <div class="font-mono font-semibold text-white text-sm">Power &amp; Energy Grids</div>
+              <div class="text-slate-400 text-xs mt-1">High-voltage transmission lines (TCN corridors), thermal generation, substation footprints, and pipeline rights-of-way.</div>
+            </div>
+            <div class="p-4 rounded-xl bg-slate-900/80 border border-white/10">
+              <div class="text-neon-emerald text-lg mb-1"><i class="fa-solid fa-road"></i></div>
+              <div class="font-mono font-semibold text-white text-sm">Highways &amp; Corridors</div>
+              <div class="text-slate-400 text-xs mt-1">Federal Right-of-Way (ROW) acquisition, crop enumeration, land parcel demarcation, and resettlement schemes.</div>
+            </div>
+            <div class="p-4 rounded-xl bg-slate-900/80 border border-white/10">
+              <div class="text-electric-blue text-lg mb-1"><i class="fa-solid fa-city"></i></div>
+              <div class="font-mono font-semibold text-white text-sm">Mass Housing &amp; Civil</div>
+              <div class="text-slate-400 text-xs mt-1">Large-scale housing estate developments in Abuja and Lagos, civil engineering infrastructure, and municipal water reticulation.</div>
+            </div>
+          </div>
+
+          <div class="flex flex-wrap items-center justify-center gap-4 pt-2">
+            <button onclick="openExportModal()" class="px-5 py-2.5 rounded-xl bg-imperial-gold hover:bg-amber-400 text-slate-950 font-mono font-bold text-xs shadow-glow-gold transition-all flex items-center gap-2">
+              <i class="fa-solid fa-file-contract"></i>
+              <span>Request Project Credentials Brief</span>
+            </button>
+            <button onclick="scrollToTwin()" class="px-4 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 border border-white/10 font-mono text-xs transition-all flex items-center gap-1.5">
+              <i class="fa-solid fa-cube text-neon-emerald"></i>
+              <span>Explore Spatial 3D Digital Twin</span>
+            </button>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ========================================================================= -->
+  <!-- 6. ADVANCED SURVEYING TECHNOLOGY & SPATIAL TOOLS                          -->
+  <!-- ========================================================================= -->
+  <section id="tech-matrix" class="py-16 bg-[#050811] border-t border-white/10">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <!-- Section Header -->
+      <div class="text-center max-w-3xl mx-auto mb-12">
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-electric-blue/10 border border-electric-blue/30 text-electric-blue text-xs font-mono uppercase tracking-wider mb-3">
+          <i class="fa-solid fa-satellite-dish"></i>
+          <span>Modern Surveying Tools &amp; Precision Mapping</span>
+        </div>
+        <h2 class="font-raleway font-bold text-2xl sm:text-4xl text-white tracking-tight">
+          Advanced Surveying &amp; Digital Twin Technology
+        </h2>
+        <p class="text-slate-300 text-sm sm:text-base mt-3 leading-relaxed">
+          How we combine satellite positioning, drone aerial scans, and interactive 3D modeling to eliminate real estate risks, verify boundaries, and protect your investments across Abuja:
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        
+        <!-- Tech Card 1 -->
+        <div class="glass-panel p-6 rounded-2xl border border-white/10 glass-card-hover space-y-3">
+          <div class="w-10 h-10 rounded-lg bg-neon-emerald/10 border border-neon-emerald/30 flex items-center justify-center text-neon-emerald text-lg">
+            <i class="fa-solid fa-city"></i>
+          </div>
+          <div class="text-[11px] font-mono text-neon-emerald uppercase tracking-wider">
+            Architectural Scale Modeling
+          </div>
+          <h3 class="font-raleway font-bold text-lg text-white">3D Estate &amp; Building Visualization</h3>
+          <p class="text-slate-300 text-xs leading-relaxed">
+            Visualize your proposed residential estate, commercial plaza, or private residence in accurate 3D scale before pouring concrete or committing major construction capital.
+          </p>
+          <div class="text-[11px] font-mono text-emerald-400 pt-2 border-t border-white/5 flex items-center gap-1.5">
+            <i class="fa-solid fa-circle-check text-neon-emerald"></i>
+            <span>Prevents Costly Structural Rework</span>
+          </div>
+        </div>
+
+        <!-- Tech Card 2 -->
+        <div class="glass-panel p-6 rounded-2xl border border-white/10 glass-card-hover space-y-3">
+          <div class="w-10 h-10 rounded-lg bg-electric-blue/10 border border-electric-blue/30 flex items-center justify-center text-electric-blue text-lg">
+            <i class="fa-solid fa-mountain"></i>
+          </div>
+          <div class="text-[11px] font-mono text-electric-blue uppercase tracking-wider">
+            Elevation &amp; Drainage Audits
+          </div>
+          <h3 class="font-raleway font-bold text-lg text-white">Topography &amp; Slope Analysis</h3>
+          <p class="text-slate-300 text-xs leading-relaxed">
+            Abuja's terrain varies from flat valleys to steep rocky ridges in Guzape and Katampe. We map contour gradients and natural flood water pathways to ensure your foundation is rock-solid.
+          </p>
+          <div class="text-[11px] font-mono text-electric-blue pt-2 border-t border-white/5 flex items-center gap-1.5">
+            <i class="fa-solid fa-circle-check text-electric-blue"></i>
+            <span>Eliminates Foundation &amp; Flood Surprises</span>
+          </div>
+        </div>
+
+        <!-- Tech Card 3 -->
+        <div class="glass-panel p-6 rounded-2xl border border-white/10 glass-card-hover space-y-3">
+          <div class="w-10 h-10 rounded-lg bg-imperial-gold/10 border border-imperial-gold/30 flex items-center justify-center text-imperial-gold text-lg">
+            <i class="fa-solid fa-crosshairs"></i>
+          </div>
+          <div class="text-[11px] font-mono text-imperial-gold uppercase tracking-wider">
+            Cadastral Synchronization
+          </div>
+          <h3 class="font-raleway font-bold text-lg text-white">AGIS Plot Boundary Matching</h3>
+          <p class="text-slate-300 text-xs leading-relaxed">
+            Every plot boundary surveyed on the ground is matched directly with the digital records of the Abuja Geographic Information Systems (AGIS) and the approved FCDA Master Plan.
+          </p>
+          <div class="text-[11px] font-mono text-imperial-gold pt-2 border-t border-white/5 flex items-center gap-1.5">
+            <i class="fa-solid fa-circle-check text-imperial-gold"></i>
+            <span>Guarantees Legal Ownership Match</span>
+          </div>
+        </div>
+
+        <!-- Tech Card 4 -->
+        <div class="glass-panel p-6 rounded-2xl border border-white/10 glass-card-hover space-y-3">
+          <div class="w-10 h-10 rounded-lg bg-purple-500/10 border border-purple-500/30 flex items-center justify-center text-purple-400 text-lg">
+            <i class="fa-solid fa-route"></i>
+          </div>
+          <div class="text-[11px] font-mono text-purple-400 uppercase tracking-wider">
+            Infrastructure Corridor Growth
+          </div>
+          <h3 class="font-raleway font-bold text-lg text-white">Access Roads &amp; Transit Mapping</h3>
+          <p class="text-slate-300 text-xs leading-relaxed">
+            We measure your property's exact proximity to key expressways (Airport Road, Shehu Shagari Way, Ring Roads) to accurately forecast 5-to-10 year capital appreciation.
+          </p>
+          <div class="text-[11px] font-mono text-purple-400 pt-2 border-t border-white/5 flex items-center gap-1.5">
+            <i class="fa-solid fa-circle-check text-purple-400"></i>
+            <span>Accurate Capital Growth Forecasting</span>
+          </div>
+        </div>
+
+        <!-- Tech Card 5 -->
+        <div class="glass-panel p-6 rounded-2xl border border-white/10 glass-card-hover space-y-3">
+          <div class="w-10 h-10 rounded-lg bg-cyan-500/10 border border-cyan-500/30 flex items-center justify-center text-cyan-400 text-lg">
+            <i class="fa-solid fa-camera-rotate"></i>
+          </div>
+          <div class="text-[11px] font-mono text-cyan-400 uppercase tracking-wider">
+            Sub-Centimeter Accuracy
+          </div>
+          <h3 class="font-raleway font-bold text-lg text-white">Drone &amp; LiDAR Aerial Surveys</h3>
+          <p class="text-slate-300 text-xs leading-relaxed">
+            We use high-precision aerial survey drones and LiDAR sensors to map large acreages and linear corridors in hours instead of weeks, capturing ground elevations with pinpoint precision.
+          </p>
+          <div class="text-[11px] font-mono text-cyan-400 pt-2 border-t border-white/5 flex items-center gap-1.5">
+            <i class="fa-solid fa-circle-check text-cyan-400"></i>
+            <span>Fast Aerial Coverage With Zero Guesswork</span>
+          </div>
+        </div>
+
+        <!-- Tech Card 6 -->
+        <div class="glass-panel p-6 rounded-2xl border border-white/10 glass-card-hover space-y-3">
+          <div class="w-10 h-10 rounded-lg bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-emerald-400 text-lg">
+            <i class="fa-solid fa-mobile-screen-button"></i>
+          </div>
+          <div class="text-[11px] font-mono text-emerald-400 uppercase tracking-wider">
+            Remote Investor Access
+          </div>
+          <h3 class="font-raleway font-bold text-lg text-white">Accessible on Any Phone Worldwide</h3>
+          <p class="text-slate-300 text-xs leading-relaxed">
+            Whether you are in London, New York, Lagos, or Abuja, review your 3D digital land models, interactive cadastral boundaries, and certified valuation briefs smoothly on your smartphone.
+          </p>
+          <div class="text-[11px] font-mono text-emerald-400 pt-2 border-t border-white/5 flex items-center gap-1.5">
+            <i class="fa-solid fa-circle-check text-emerald-400"></i>
+            <span>Optimized for Diaspora Clients</span>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ========================================================================= -->
+  <!-- 6B. PLAIN-ENGLISH GLOSSARY & INVESTOR FAQS                                -->
+  <!-- ========================================================================= -->
+  <section id="glossary-faq" class="py-16 bg-[#060914] border-t border-white/10 relative overflow-hidden">
+    <div class="absolute right-1/4 top-0 w-80 h-80 bg-neon-emerald/5 rounded-full blur-3xl pointer-events-none"></div>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      
+      <!-- Section Header -->
+      <div class="text-center max-w-3xl mx-auto mb-12">
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-electric-blue/10 border border-electric-blue/30 text-electric-blue text-xs font-mono uppercase tracking-wider mb-3">
+          <i class="fa-solid fa-book-open"></i>
+          <span>Knowledge Base for Investors</span>
+        </div>
+        <h2 class="font-raleway font-bold text-2xl sm:text-4xl text-white tracking-tight">
+          Common Real Estate Questions &amp; Glossary
+        </h2>
+        <p class="text-slate-300 text-sm sm:text-base mt-3 leading-relaxed">
+          Clear, jargon-free explanations of the most critical terms and procedures in Nigerian estate surveying, valuation, and land acquisition:
+        </p>
+      </div>
+
+      <!-- FAQ & Glossary Accordion/Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        
+        <!-- FAQ 1: AGIS -->
+        <div class="glass-panel p-6 rounded-2xl border border-white/10 hover:border-neon-emerald/30 transition-all space-y-2.5">
+          <div class="flex items-center gap-3">
+            <div class="w-9 h-9 rounded-lg bg-neon-emerald/10 border border-neon-emerald/30 flex items-center justify-center text-neon-emerald text-sm shrink-0">
+              <i class="fa-solid fa-database"></i>
+            </div>
+            <h3 class="font-raleway font-bold text-base text-neon-emerald">
+              What is AGIS and why is it mandatory for any Abuja land deal?
+            </h3>
+          </div>
+          <p class="text-xs sm:text-sm text-slate-300 leading-relaxed pl-12">
+            <strong>AGIS (Abuja Geographic Information Systems)</strong> is the official computerized land registry of the Federal Capital Territory Administration (FCTA). Every legitimate plot in Abuja has an official cadastral file, registered survey coordinates, and ownership history at AGIS. An AGIS legal search verifies who truly owns the land and confirms it is free of unpaid ground rents, bank mortgages, or court injunctions.
+          </p>
+        </div>
+
+        <!-- FAQ 2: C of O vs R of O -->
+        <div class="glass-panel p-6 rounded-2xl border border-white/10 hover:border-neon-emerald/30 transition-all space-y-2.5">
+          <div class="flex items-center gap-3">
+            <div class="w-9 h-9 rounded-lg bg-neon-emerald/10 border border-neon-emerald/30 flex items-center justify-center text-neon-emerald text-sm shrink-0">
+              <i class="fa-solid fa-certificate"></i>
+            </div>
+            <h3 class="font-raleway font-bold text-base text-neon-emerald">
+              What is the difference between a C of O and an R of O?
+            </h3>
+          </div>
+          <p class="text-xs sm:text-sm text-slate-300 leading-relaxed pl-12">
+            A <strong>Certificate of Occupancy (C of O)</strong> is the supreme government title deed in Nigeria, conferring a 99-year statutory leasehold signed by the FCT Minister. A <strong>Right of Occupancy (R of O)</strong> is the preliminary letter of offer or grant; while legally valid, it requires administrative regularization at AGIS before it becomes a full C of O. C of O plots command the highest resale values and easiest bank loan approvals.
+          </p>
+        </div>
+
+        <!-- FAQ 3: Estate Surveyor vs Agent -->
+        <div class="glass-panel p-6 rounded-2xl border border-white/10 hover:border-imperial-gold/30 transition-all space-y-2.5">
+          <div class="flex items-center gap-3">
+            <div class="w-9 h-9 rounded-lg bg-imperial-gold/10 border border-imperial-gold/30 flex items-center justify-center text-imperial-gold text-sm shrink-0">
+              <i class="fa-solid fa-user-shield"></i>
+            </div>
+            <h3 class="font-raleway font-bold text-base text-imperial-gold">
+              Why use a licensed Estate Surveyor instead of a regular agent?
+            </h3>
+          </div>
+          <p class="text-xs sm:text-sm text-slate-300 leading-relaxed pl-12">
+            Informal agents earn purely on commission when a deal closes—so their commercial incentive is to push you to pay quickly regardless of title flaws. A <strong>Registered Estate Surveyor &amp; Valuer (RSV)</strong> certified by <strong>ESVARBON and NIESV</strong> is a chartered professional carrying statutory liability and indemnity insurance. We provide unbiased, legally binding valuations and title verification that protect your money.
+          </p>
+        </div>
+
+        <!-- FAQ 4: OMV vs FSV -->
+        <div class="glass-panel p-6 rounded-2xl border border-white/10 hover:border-imperial-gold/30 transition-all space-y-2.5">
+          <div class="flex items-center gap-3">
+            <div class="w-9 h-9 rounded-lg bg-imperial-gold/10 border border-imperial-gold/30 flex items-center justify-center text-imperial-gold text-sm shrink-0">
+              <i class="fa-solid fa-scale-balanced"></i>
+            </div>
+            <h3 class="font-raleway font-bold text-base text-imperial-gold">
+              What does 'Open Market Value' (OMV) vs 'Forced Sale Value' (FSV) mean?
+            </h3>
+          </div>
+          <p class="text-xs sm:text-sm text-slate-300 leading-relaxed pl-12">
+            <strong>Open Market Value (OMV)</strong> is what a willing buyer would pay a willing seller under normal market marketing conditions. <strong>Forced Sale Value (FSV)</strong> is the discounted benchmark (typically 70% to 75% of OMV) that reflects an urgent 60-to-90 day distress liquidation. Commercial banks use FSV to set loan lending limits to ensure they are fully secured if default occurs.
+          </p>
+        </div>
+
+        <!-- FAQ 5: Diaspora Buyers -->
+        <div class="glass-panel p-6 rounded-2xl border border-white/10 hover:border-electric-blue/30 transition-all space-y-2.5">
+          <div class="flex items-center gap-3">
+            <div class="w-9 h-9 rounded-lg bg-electric-blue/10 border border-electric-blue/30 flex items-center justify-center text-electric-blue text-sm shrink-0">
+              <i class="fa-solid fa-plane-arrival"></i>
+            </div>
+            <h3 class="font-raleway font-bold text-base text-electric-blue">
+              Can diaspora investors conduct remote land verification safely?
+            </h3>
+          </div>
+          <p class="text-xs sm:text-sm text-slate-300 leading-relaxed pl-12">
+            Yes, over 40% of our verification briefs come from Nigerians in the UK, United States, Canada, UAE, and Europe. We provide a full remote due diligence package: on-site GPS beacon photos/video walk-throughs, certified AGIS title search reports, and official digital valuation seals delivered directly to your email, eliminating the need to send money blindly to relatives or unregistered middlemen.
+          </p>
+        </div>
+
+        <!-- FAQ 6: What is RAP? -->
+        <div class="glass-panel p-6 rounded-2xl border border-white/10 hover:border-electric-blue/30 transition-all space-y-2.5">
+          <div class="flex items-center gap-3">
+            <div class="w-9 h-9 rounded-lg bg-electric-blue/10 border border-electric-blue/30 flex items-center justify-center text-electric-blue text-sm shrink-0">
+              <i class="fa-solid fa-people-roof"></i>
+            </div>
+            <h3 class="font-raleway font-bold text-base text-electric-blue">
+              What is a Resettlement Action Plan (RAP) and why does it matter?
+            </h3>
+          </div>
+          <p class="text-xs sm:text-sm text-slate-300 leading-relaxed pl-12">
+            A <strong>Resettlement Action Plan (RAP)</strong> is a structured legal and socio-economic framework used when acquiring land where local villages, crops, or communities reside. Executed under <strong>World Bank ESS5 and IFC PS5 standards</strong>, it ensures Project-Affected Persons (PAPs) are compensated at non-depreciated <em>Full Replacement Value (FRV)</em>, preventing violent land clashes, court injunctions, and project stoppages.
+          </p>
+        </div>
+
+      </div>
+
+      <!-- Quick Contact Box -->
+      <div class="mt-10 p-6 rounded-2xl glass-panel border border-neon-emerald/30 text-center max-w-3xl mx-auto space-y-3.5">
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-neon-emerald/10 border border-neon-emerald/30 text-neon-emerald text-xs font-mono">
+          <i class="fa-solid fa-location-dot"></i>
+          <span>30 Okemesi Crescent, Opposite Winner Lab, Garki 2, Abuja</span>
+        </div>
+        <h4 class="font-raleway font-bold text-lg sm:text-xl text-imperial-gold">Have a specific property or land question in Abuja?</h4>
+        <p class="text-xs sm:text-sm text-slate-300 max-w-xl mx-auto">
+          Our registered surveyors and valuers are available at our Garki 2 practice desk to review property files, offer documents, beacon survey plans, and AGIS files.
+        </p>
+        <div class="pt-2 flex flex-wrap items-center justify-center gap-3">
+          <button onclick="openVerificationModal()" class="px-5 py-2.5 rounded-xl bg-neon-emerald hover:bg-emerald-400 text-slate-950 font-mono font-bold text-xs shadow-glow-emerald transition-all flex items-center gap-2">
+            <i class="fa-solid fa-shield-halved"></i>
+            <span>Submit a Land Verification Question</span>
+          </button>
+          <a href="tel:+2348060820365" class="px-4 py-2.5 rounded-xl bg-slate-900 hover:bg-slate-800 text-slate-200 border border-white/10 font-mono text-xs transition-all flex items-center gap-1.5">
+            <i class="fa-solid fa-phone text-neon-emerald"></i>
+            <span>+234 8060 820 365</span>
+          </a>
+          <a href="mailto:EmmanuelNwanjiobi@gmail.com" class="px-4 py-2.5 rounded-xl bg-slate-900 hover:bg-slate-800 text-slate-200 border border-white/10 font-mono text-xs transition-all flex items-center gap-1.5">
+            <i class="fa-solid fa-envelope text-neon-emerald"></i>
+            <span>EmmanuelNwanjiobi@gmail.com</span>
+          </a>
+          <a href="https://wa.me/2348060820365?text=Hello%20Emmanuel%20Nwanjiobi%20%26%20Co.,%20I%20have%20an%20inquiry%20regarding%20property%20valuation%20or%20land%20verification." target="_blank" rel="noopener noreferrer" class="px-4 py-2.5 rounded-xl bg-emerald-700 hover:bg-emerald-600 text-white font-mono text-xs transition-all flex items-center gap-1.5">
+            <i class="fa-brands fa-whatsapp text-sm"></i>
+            <span>WhatsApp Us</span>
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ========================================================================= -->
+  <!-- 7. FOOTER                                                                 -->
+  <!-- ========================================================================= -->
+  <footer class="glass-panel border-t border-white/10 py-12 text-slate-400 text-xs font-mono">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-6 pb-8 border-b border-white/10">
+        
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-xl bg-slate-900 border border-neon-emerald/40 flex items-center justify-center p-1.5 shadow-glow-emerald shrink-0">
+            <svg class="w-full h-full" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <linearGradient id="footerLogoGrad" x1="4" y1="4" x2="44" y2="44" gradientUnits="userSpaceOnUse">
+                  <stop offset="0%" stop-color="#00F5A0" />
+                  <stop offset="60%" stop-color="#00D8F6" />
+                  <stop offset="100%" stop-color="#FFB800" />
+                </linearGradient>
+              </defs>
+              <polygon points="24,4 42,14 42,34 24,44 6,34 6,14" stroke="url(#footerLogoGrad)" stroke-width="2" stroke-linejoin="round" fill="rgba(0, 245, 160, 0.1)" />
+              <line x1="24" y1="1" x2="24" y2="5" stroke="#00F5A0" stroke-width="1.5" stroke-linecap="round" />
+              <line x1="24" y1="43" x2="24" y2="47" stroke="#00F5A0" stroke-width="1.5" stroke-linecap="round" />
+              <line x1="3" y1="24" x2="7" y2="24" stroke="#00F5A0" stroke-width="1.5" stroke-linecap="round" />
+              <line x1="41" y1="24" x2="45" y2="24" stroke="#00F5A0" stroke-width="1.5" stroke-linecap="round" />
+              <path d="M15 15V33M15 15H24M15 24H22M15 33H24" stroke="#FFFFFF" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" />
+              <path d="M20 33L31 15V33" stroke="url(#footerLogoGrad)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" />
+              <circle cx="24" cy="24" r="2.2" fill="#FFB800" />
+            </svg>
+          </div>
+          <div>
+            <div class="font-mono font-bold text-white text-sm">EMMANUEL NWANJIOBI &amp; CO.</div>
+            <div class="text-[11px] text-slate-400">Estate Surveyors &amp; Valuation Consultants · Abuja, Nigeria</div>
+            <div class="text-[10px] text-neon-emerald mt-0.5">ESVARBON Certified · NIESV Registered Practice</div>
+          </div>
+        </div>
+
+        <div class="space-y-1 text-slate-300 text-xs">
+          <div class="flex items-center gap-2">
+            <i class="fa-solid fa-location-dot text-neon-emerald"></i>
+            <span>30 Okemesi Crescent, Opposite Winner Lab, Garki 2, Abuja, FCT, Nigeria</span>
+          </div>
+          <div class="flex flex-wrap items-center gap-4 text-xs font-mono">
+            <a href="tel:+2348060820365" class="hover:text-neon-emerald transition-colors flex items-center gap-1.5">
+              <i class="fa-solid fa-phone text-neon-emerald"></i>
+              <span>+234 8060 820 365</span>
+            </a>
+            <a href="mailto:EmmanuelNwanjiobi@gmail.com" class="hover:text-neon-emerald transition-colors flex items-center gap-1.5">
+              <i class="fa-solid fa-envelope text-neon-emerald"></i>
+              <span>EmmanuelNwanjiobi@gmail.com</span>
+            </a>
+            <a href="https://wa.me/2348060820365" target="_blank" rel="noopener noreferrer" class="hover:text-emerald-400 transition-colors flex items-center gap-1.5">
+              <i class="fa-brands fa-whatsapp text-emerald-400"></i>
+              <span>WhatsApp Direct</span>
+            </a>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="flex flex-col md:flex-row items-center justify-between gap-4 pt-6">
+        <div class="flex flex-wrap items-center gap-5 text-slate-400 text-xs">
+          <a href="#investor-pathways" class="hover:text-neon-emerald transition-colors">Investor Guide</a>
+          <a href="#safety-checklist" class="hover:text-neon-emerald transition-colors">Due Diligence</a>
+          <a href="#digital-twin" class="hover:text-neon-emerald transition-colors">3D Digital Twin</a>
+          <a href="#valuation-simulator" class="hover:text-neon-emerald transition-colors">Valuation Simulator</a>
+          <a href="#project-experience" class="hover:text-neon-emerald transition-colors">Project Experience</a>
+          <a href="#glossary-faq" class="hover:text-neon-emerald transition-colors">Glossary &amp; FAQs</a>
+        </div>
+
+        <div class="text-slate-500 text-center md:text-right text-[11px]">
+          &copy; 2026 Emmanuel Nwanjiobi &amp; Co. Registered with ESVARBON &amp; NIESV.
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ========================================================================= -->
+  <!-- 8. EXPORT SPECS & VALUATION BRIEF MODAL                                   -->
+  <!-- ========================================================================= -->
+  <div id="export-modal" class="fixed inset-0 z-50 hidden bg-black/80 backdrop-blur-md flex items-center justify-center p-4">
+    <div class="glass-panel border border-neon-emerald/40 rounded-2xl max-w-2xl w-full p-6 sm:p-8 space-y-6 max-h-[90vh] overflow-y-auto">
+      
+      <div class="flex items-center justify-between border-b border-white/10 pb-4">
+        <div>
+          <span class="text-xs font-mono text-neon-emerald uppercase tracking-wider">Formal Memorandum</span>
+          <h3 class="font-raleway font-bold text-xl text-white tracking-tight">Executive Valuation &amp; Technical Brief</h3>
+        </div>
+        <button onclick="closeExportModal()" class="text-slate-400 hover:text-white p-2 text-lg focus:outline-none">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+
+      <div id="modal-report-content" class="bg-slate-900/90 rounded-xl p-5 border border-white/10 text-xs font-mono space-y-3 leading-relaxed text-slate-300">
+        <!-- Dynamic report content filled by JS -->
+      </div>
+
+      <div class="flex flex-wrap items-center justify-between gap-3 pt-2">
+        <div id="copy-status" class="text-xs font-mono text-neon-emerald hidden">
+          <i class="fa-solid fa-check mr-1"></i> Copied to clipboard!
+        </div>
+        <div class="flex items-center gap-2 ml-auto">
+          <button onclick="copyReportToClipboard()" class="px-4 py-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 border border-white/15 text-xs font-mono transition-all flex items-center gap-1.5">
+            <i class="fa-solid fa-copy"></i>
+            <span>Copy Brief Text</span>
+          </button>
+          <button onclick="printValuationReport()" class="px-4 py-2 rounded-lg bg-neon-emerald hover:bg-emerald-400 text-slate-950 font-bold text-xs font-mono transition-all flex items-center gap-1.5">
+            <i class="fa-solid fa-print"></i>
+            <span>Print Formal Memorandum</span>
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ========================================================================= -->
+  <!-- 8B. LAND VERIFICATION & DUE DILIGENCE INQUIRY MODAL                       -->
+  <!-- ========================================================================= -->
+  <div id="verification-modal" class="fixed inset-0 z-50 hidden bg-black/80 backdrop-blur-md flex items-center justify-center p-4">
+    <div class="glass-panel border border-neon-emerald/40 rounded-2xl max-w-xl w-full p-6 sm:p-8 space-y-6 max-h-[90vh] overflow-y-auto">
+      
+      <div class="flex items-center justify-between border-b border-white/10 pb-4">
+        <div>
+          <span class="text-xs font-mono text-neon-emerald uppercase tracking-wider flex items-center gap-1.5">
+            <span class="w-2 h-2 rounded-full bg-neon-emerald animate-pulse"></span>
+            Fast 24 to 48-Hour Turnaround
+          </span>
+          <h3 class="font-raleway font-bold text-xl text-white tracking-tight">Abuja Land Verification &amp; Due Diligence</h3>
+        </div>
+        <button onclick="closeVerificationModal()" class="text-slate-400 hover:text-white p-2 text-lg focus:outline-none">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+
+      <div id="verification-form-container">
+        <p class="text-xs text-slate-300 mb-4 leading-relaxed">
+          Provide your property details below. Our licensed estate surveyors will initiate an AGIS cadastral registry search, beacon GPS check, and independent valuation:
+        </p>
+
+        <form id="verify-plot-form" onsubmit="handleVerificationSubmit(event)" class="space-y-4 text-xs font-mono">
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+            <div>
+              <label class="block text-slate-300 uppercase tracking-wider mb-1 text-[11px]">Your Full Name *</label>
+              <input type="text" id="verify-name" required placeholder="e.g. Dr. Ngozi Okonjo" class="w-full bg-slate-900 border border-white/15 rounded-xl px-3 py-2 text-slate-200 focus:outline-none focus:border-neon-emerald" />
+            </div>
+            <div>
+              <label class="block text-slate-300 uppercase tracking-wider mb-1 text-[11px]">Phone / WhatsApp *</label>
+              <input type="tel" id="verify-phone" required placeholder="+234 80... or Diaspora Int'l" class="w-full bg-slate-900 border border-white/15 rounded-xl px-3 py-2 text-slate-200 focus:outline-none focus:border-neon-emerald" />
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+            <div>
+              <label class="block text-slate-300 uppercase tracking-wider mb-1 text-[11px]">Email Address *</label>
+              <input type="email" id="verify-email" required placeholder="you@domain.com" class="w-full bg-slate-900 border border-white/15 rounded-xl px-3 py-2 text-slate-200 focus:outline-none focus:border-neon-emerald" />
+            </div>
+            <div>
+              <label class="block text-slate-300 uppercase tracking-wider mb-1 text-[11px]">Investor Profile</label>
+              <select id="verify-profile" class="w-full bg-slate-900 border border-white/15 rounded-xl px-3 py-2 text-slate-200 focus:outline-none focus:border-neon-emerald">
+                <option value="diaspora">Diaspora Buyer (UK/US/Canada/Europe)</option>
+                <option value="local_buyer">Private Buyer in Nigeria</option>
+                <option value="developer">Real Estate Developer / Builder</option>
+                <option value="corporate">Bank / Institutional Investor</option>
+                <option value="church_mosque">Place of Worship / Faith-Based Organization</option>
+                <option value="school_hospital">School / University / Healthcare Facility</option>
+                <option value="industrial_logistics">Industrial / Factory / Logistics Operator</option>
+                <option value="ngo_diplomatic">International NGO / Diplomatic Mission</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+            <div>
+              <label class="block text-slate-300 uppercase tracking-wider mb-1 text-[11px]">Target District in Abuja</label>
+              <select id="verify-district" class="w-full bg-slate-900 border border-white/15 rounded-xl px-3 py-2 text-slate-200 focus:outline-none focus:border-neon-emerald">
+                <option value="maitama">Maitama (Zone A05/A06)</option>
+                <option value="guzape">Guzape Ridge (Zone A09)</option>
+                <option value="katampe">Katampe Extension (Zone B19)</option>
+                <option value="cbd">Central Business District (Zone A00)</option>
+                <option value="jabi">Jabi Waterfront (Zone B04)</option>
+                <option value="idu">Idu Industrial &amp; Rail Corridor</option>
+                <option value="airport_corridor">Airport Road / Lugbe Logistics Corridor</option>
+                <option value="wuse">Wuse II / Wuse Zone</option>
+                <option value="asokoro">Asokoro (Zone A04)</option>
+                <option value="garki">Garki I &amp; II</option>
+                <option value="bwari_educational">Bwari / Kubwa Institutional Belt</option>
+                <option value="other">Other FCT Layout / Satellite Town</option>
+              </select>
+            </div>
+            <div>
+              <label class="block text-slate-300 uppercase tracking-wider mb-1 text-[11px]">Plot / File / Beacon No.</label>
+              <input type="text" id="verify-plot-no" placeholder="e.g. Plot 1042, File MISC 3918" class="w-full bg-slate-900 border border-white/15 rounded-xl px-3 py-2 text-slate-200 focus:outline-none focus:border-neon-emerald" />
+            </div>
+          </div>
+
+          <div>
+            <label class="block text-slate-300 uppercase tracking-wider mb-1 text-[11px]">Service Needed</label>
+            <select id="verify-service" class="w-full bg-slate-900 border border-white/15 rounded-xl px-3 py-2 text-slate-200 focus:outline-none focus:border-neon-emerald">
+              <option value="title_check">Pre-Purchase AGIS Search &amp; Beacon Ground Verification</option>
+              <option value="valuation">Certified Property Valuation (OMV &amp; Bank FSV)</option>
+              <option value="feasibility">Rental Yield &amp; Construction Feasibility Study</option>
+              <option value="resettlement">Resettlement Action Planning (RAP) &amp; Safeguards</option>
+            </select>
+          </div>
+
+          <div>
+            <label class="block text-slate-300 uppercase tracking-wider mb-1 text-[11px]">Seller Claims / Notes</label>
+            <textarea id="verify-notes" rows="2" placeholder="e.g. Seller claims plot has C of O and is asking ₦400m. Want to confirm authenticity before making bank transfer." class="w-full bg-slate-900 border border-white/15 rounded-xl px-3 py-2 text-slate-200 focus:outline-none focus:border-neon-emerald text-xs"></textarea>
+          </div>
+
+          <button type="submit" class="w-full py-3 px-4 rounded-xl bg-neon-emerald hover:bg-emerald-400 text-slate-950 font-bold text-xs shadow-glow-emerald transition-all flex items-center justify-center gap-2">
+            <i class="fa-solid fa-shield-halved"></i>
+            <span>Submit Plot for Due Diligence Review</span>
+          </button>
+        </form>
+      </div>
+
+      <!-- Success Screen after submit -->
+      <div id="verification-success" class="hidden text-center space-y-4 py-4">
+        <div class="w-16 h-16 rounded-full bg-neon-emerald/20 text-neon-emerald flex items-center justify-center text-3xl mx-auto border border-neon-emerald/40">
+          <i class="fa-solid fa-check-double"></i>
+        </div>
+        <h4 class="font-raleway font-bold text-xl text-white">Inquiry Registered Successfully!</h4>
+        <div class="p-4 rounded-xl bg-slate-900/90 border border-white/10 text-xs font-mono text-left space-y-2 text-slate-300">
+          <div class="flex justify-between items-center pb-2 border-b border-white/10">
+            <span class="text-slate-400">File Reference Code:</span>
+            <span id="ref-code" class="text-neon-emerald font-bold">EN-VAL-2026-8941</span>
+          </div>
+          <div><strong>Turnaround Time:</strong> 24 to 48 Hours for preliminary AGIS verification.</div>
+          <div><strong>Survey Desk:</strong> 30 Okemesi Crescent, Opposite Winner Lab, Garki 2, Abuja, FCT, Nigeria.</div>
+          <div><strong>Lead Surveyor:</strong> Emmanuel Nwanjiobi (RSV, NIESV).</div>
+          <div><strong>Direct Hotline:</strong> +234 8060 820 365</div>
+        </div>
+        <p class="text-xs text-slate-400">
+          A member of our cadastral verification team will contact you via WhatsApp / Phone to confirm plot coordinates.
+        </p>
+        <div class="pt-2 flex flex-col sm:flex-row gap-2.5 justify-center">
+          <button onclick="closeVerificationModal()" class="px-5 py-2.5 rounded-xl bg-neon-emerald text-slate-950 font-mono font-bold text-xs shadow-glow-emerald">
+            Done
+          </button>
+          <a href="tel:+2348060820365" class="px-4 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 border border-white/10 font-mono text-xs flex items-center justify-center gap-1.5">
+            <i class="fa-solid fa-phone text-neon-emerald"></i>
+            <span>Call Survey Desk</span>
+          </a>
+          <a href="https://wa.me/2348060820365?text=Hello%20Emmanuel%20Nwanjiobi%20%26%20Co.,%20I%20just%20submitted%20a%20land%20verification%20request%20online." target="_blank" rel="noopener noreferrer" class="px-4 py-2.5 rounded-xl bg-emerald-700 hover:bg-emerald-600 text-white font-mono text-xs flex items-center justify-center gap-1.5">
+            <i class="fa-brands fa-whatsapp text-sm"></i>
+            <span>WhatsApp Desk</span>
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ========================================================================= -->
+  <!-- 9. JAVASCRIPT: THREE.JS ENGINE & APPLICATION LOGIC                        -->
+  <!-- ========================================================================= -->
+  <script>
+    // =======================================================================
+    // Global Application State & Benchmarks
+    // =======================================================================
+    const APP_STATE = {
+      selectedDistrict: 'maitama',
+      landAreaSqm: 2500,
+      devType: 'residential',
+      titleStatus: 'cof_o',
+      papCount: 0,
+      currency: 'NGN', // 'NGN', 'USD', 'GBP'
+      wireframeMode: false,
+      lightingMode: 'cyber_night', // cyber_night, sunset, daylight
+      autoRotate: true,
+      cameraTargetPos: new THREE.Vector3(0, 18, 32),
+      cameraLookAt: new THREE.Vector3(0, 3, 0)
+    };
+
+    const CURRENCY_CONFIG = {
+      NGN: { symbol: '₦', rate: 1, label: 'Naira' },
+      USD: { symbol: '$', rate: 1450, label: 'US Dollars' },
+      GBP: { symbol: '£', rate: 1900, label: 'British Pounds' }
+    };
+
+    function formatCurrency(nairaValue) {
+      const curr = CURRENCY_CONFIG[APP_STATE.currency] || CURRENCY_CONFIG.NGN;
+      const converted = Math.round(nairaValue / curr.rate);
+      return `${curr.symbol}${converted.toLocaleString()}`;
+    }
+
+    function setCurrency(currCode) {
+      APP_STATE.currency = currCode;
+      document.querySelectorAll('.curr-btn').forEach(btn => {
+        if (btn.dataset.curr === currCode) {
+          btn.classList.add('bg-neon-emerald', 'text-slate-950', 'font-bold');
+          btn.classList.remove('text-slate-300');
+        } else {
+          btn.classList.remove('bg-neon-emerald', 'text-slate-950', 'font-bold');
+          btn.classList.add('text-slate-300');
+        }
+      });
+      updateValuationCalculation();
+    }
+
+    // Realistic Abuja FCT District Baseline Rates (Naira / sqm)
+    const DISTRICT_RATES = {
+      maitama: {
+        name: 'Maitama Diplomatic Zone',
+        baseRate: 550000,
+        yield: 7.8,
+        rapRisk: 'Low',
+        rapTier: 'PS5 Tier 1',
+        elevation: 512,
+        camera: { pos: new THREE.Vector3(-14, 14, 18), look: new THREE.Vector3(-8, 3, 4) }
+      },
+      cbd: {
+        name: 'Central Business District (CBD)',
+        baseRate: 720000,
+        yield: 8.7,
+        rapRisk: 'Low',
+        rapTier: 'PS5 Tier 1',
+        elevation: 480,
+        camera: { pos: new THREE.Vector3(0, 18, 26), look: new THREE.Vector3(0, 4, 0) }
+      },
+      guzape: {
+        name: 'Guzape Ridge Diplomatic Area',
+        baseRate: 340000,
+        yield: 9.2,
+        rapRisk: 'Moderate',
+        rapTier: 'PS5 Tier 2',
+        elevation: 590,
+        camera: { pos: new THREE.Vector3(16, 16, 14), look: new THREE.Vector3(10, 5, -2) }
+      },
+      katampe: {
+        name: 'Katampe Hillside Extension',
+        baseRate: 240000,
+        yield: 8.4,
+        rapRisk: 'Low',
+        rapTier: 'PS5 Tier 1',
+        elevation: 560,
+        camera: { pos: new THREE.Vector3(-12, 16, -10), look: new THREE.Vector3(-6, 4, -4) }
+      },
+      jabi: {
+        name: 'Jabi Lakefront District',
+        baseRate: 380000,
+        yield: 8.9,
+        rapRisk: 'Moderate',
+        rapTier: 'PS5 Tier 2',
+        elevation: 470,
+        camera: { pos: new THREE.Vector3(8, 14, 20), look: new THREE.Vector3(4, 2, 6) }
+      },
+      idu: {
+        name: 'Idu Industrial Corridor',
+        baseRate: 95000,
+        yield: 10.4,
+        rapRisk: 'High (Village Boundary)',
+        rapTier: 'PS5 Tier 3',
+        elevation: 430,
+        camera: { pos: new THREE.Vector3(18, 12, 22), look: new THREE.Vector3(12, 2, 8) }
+      },
+      overview: {
+        name: 'Abuja Central Metropole (Panorama)',
+        baseRate: 450000,
+        yield: 8.4,
+        rapRisk: 'Integrated Baseline',
+        rapTier: 'FCT Overall',
+        elevation: 505,
+        camera: { pos: new THREE.Vector3(0, 26, 40), look: new THREE.Vector3(0, 2, 0) }
+      }
+    };
+
+    // Typology Multipliers
+    const TYPOLOGY_MULTIPLIER = {
+      commercial: 1.35,
+      residential: 1.0,
+      infrastructure: 0.75,
+      industrial: 0.65,
+      institutional_nfp: 0.85,
+      mixed_use: 1.2
+    };
+
+    // Homepage Sector Explorer Intelligence Data
+    const SECTOR_INTELLIGENCE = {
+      residential: {
+        title: 'Residential Estates, Luxury Villas & Diplomatic Residences',
+        badge: 'High Expatriate & Diaspora Demand',
+        badgeClass: 'bg-neon-emerald/20 text-neon-emerald border-neon-emerald/30',
+        zones: 'Maitama, Guzape Ridge, Katampe Extension, Asokoro, Jabi Lakefront, Lifecamp, Lokogoma, Gwarinpa',
+        avgRate: '₦240,000 to ₦550,000 / sqm',
+        yield: '7.5% – 9.2% annual net rental return',
+        zoningNotes: 'FCTA Residential Low/Medium Density (R1/R2). Strict building height covenants and perimeter setbacks.',
+        dueDiligence: 'Physical ground beacon matching via differential GPS to prevent purchasing rocky ravines or flood drainage reservations. AGIS file search for clean C of O or Ministerial R of O.',
+        preset: 'duplex_guzape',
+        district: 'guzape'
+      },
+      commercial: {
+        title: 'Grade-A Corporate Headquarters, Plazas & Retail Centers',
+        badge: 'Institutional Yield: 8.5% – 11.5%',
+        badgeClass: 'bg-cyan-500/20 text-cyan-300 border-cyan-500/30',
+        zones: 'Central Business District (CBD Zone A00), Wuse II, Garki Central, Jabi Lakefront Commercial Strip',
+        avgRate: '₦380,000 to ₦720,000 / sqm',
+        yield: '8.5% – 11.5% annual corporate leasing yield',
+        zoningNotes: 'FCTA Commercial Core (C1/C2). Governed by Floor Area Ratio (FAR), mandatory multi-tier basement parking, and fire egress audits.',
+        dueDiligence: 'Legal title encumbrance audit at AGIS to ensure no outstanding bank mortgage liens or FCDA unapproved sub-leases. Verification of approved engineering drawings.',
+        preset: 'plaza_cbd',
+        district: 'cbd'
+      },
+      industrial: {
+        title: 'Manufacturing Plants, Warehousing & Rail Freight Hubs',
+        badge: 'Heavy Infrastructure & Dry Port Access',
+        badgeClass: 'bg-purple-500/20 text-purple-300 border-purple-500/30',
+        zones: 'Idu Industrial Area (Zones IND 1-3), Airport Aviation Cargo Hub, Giri Corridor, Madalla Gateway',
+        avgRate: '₦95,000 to ₦185,000 / sqm',
+        yield: '10.0% – 13.0% long-term logistics return',
+        zoningNotes: 'FCTA Industrial Layout. Requires non-effluent Environmental Impact Assessment (EIA), 33kV dedicated heavy power feeder connection, and heavy trailer turning radius.',
+        dueDiligence: 'Verification of industrial development covenants (strict 2-to-3 year building clause). Physical demarcation along native village border settlements to ensure zero community resistance.',
+        preset: 'industrial_idu',
+        district: 'idu'
+      },
+      institutional: {
+        title: 'Places of Worship, Educational Campuses, Hospitals & Diplomatic Missions',
+        badge: 'Civic / Not-for-Profit Statutory Zoning',
+        badgeClass: 'bg-amber-500/20 text-amber-300 border-amber-500/30',
+        zones: 'Central Diplomatic Zone, Institutional layouts in Garki, Bwari Educational Belt, Airport Road Campuses',
+        avgRate: '₦180,000 to ₦420,000 / sqm',
+        yield: 'Long-term Institutional & Social Capital Value',
+        zoningNotes: 'FCTA Master Plan Civic/Institutional designation. Strictly prohibited from commercial subleasing without official FCTA regularization. Ground rent statutory concessions applicable.',
+        dueDiligence: 'Verification of original Institutional Land Allocation letter from FCTA. Mandatory confirmation that the plot is not excised from a public green-belt park or road reservation.',
+        preset: 'civic_ngo',
+        district: 'maitama'
+      }
+    };
+
+    function selectHomeSector(sectorKey) {
+      const data = SECTOR_INTELLIGENCE[sectorKey] || SECTOR_INTELLIGENCE.residential;
+      
+      // Update buttons
+      document.querySelectorAll('.home-sector-btn').forEach(btn => {
+        btn.classList.remove('bg-neon-emerald', 'text-slate-950', 'shadow-glow-emerald');
+        btn.classList.add('text-slate-300');
+      });
+      const activeBtn = document.getElementById(`home-sector-btn-${sectorKey}`);
+      if (activeBtn) {
+        activeBtn.classList.add('bg-neon-emerald', 'text-slate-950', 'shadow-glow-emerald');
+        activeBtn.classList.remove('text-slate-300');
+      }
+
+      const panel = document.getElementById('home-sector-panel');
+      if (!panel) return;
+
+      panel.innerHTML = `
+        <div class="flex flex-wrap items-center justify-between gap-3 border-b border-white/10 pb-3 mb-4">
+          <div>
+            <span class="text-xs font-mono px-2.5 py-1 rounded-full border ${data.badgeClass} font-semibold">${data.badge}</span>
+            <h4 class="font-raleway font-bold text-lg sm:text-xl text-white mt-2">${data.title}</h4>
+          </div>
+          <div class="text-right">
+            <div class="text-[11px] font-mono text-slate-400 uppercase tracking-wider">Benchmark Land Rate</div>
+            <div class="text-sm sm:text-base font-mono font-bold text-neon-emerald">${data.avgRate}</div>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs font-mono mb-5">
+          <div class="p-3.5 rounded-xl bg-slate-900/80 border border-white/10 space-y-1.5">
+            <div class="text-slate-400 text-[11px] uppercase tracking-wider flex items-center gap-1.5">
+              <i class="fa-solid fa-map-pin text-electric-blue"></i>
+              <span>Core Investment Corridors in Abuja:</span>
+            </div>
+            <div class="text-slate-200 font-sans leading-relaxed">${data.zones}</div>
+            <div class="pt-1 text-[11px] text-amber-300"><strong>Yield Expectation:</strong> ${data.yield}</div>
+          </div>
+
+          <div class="p-3.5 rounded-xl bg-slate-900/80 border border-white/10 space-y-1.5">
+            <div class="text-slate-400 text-[11px] uppercase tracking-wider flex items-center gap-1.5">
+              <i class="fa-solid fa-scale-balanced text-imperial-gold"></i>
+              <span>FCTA Master Plan &amp; Statutory Zoning:</span>
+            </div>
+            <div class="text-slate-300 font-sans leading-relaxed">${data.zoningNotes}</div>
+          </div>
+        </div>
+
+        <div class="p-3.5 rounded-xl bg-slate-950/90 border border-neon-emerald/30 text-xs font-mono space-y-1.5 mb-5">
+          <div class="text-neon-emerald font-semibold uppercase tracking-wider text-[11px] flex items-center gap-1.5">
+            <i class="fa-solid fa-shield-halved"></i>
+            <span>Our Registered Surveyor Pre-Purchase Safeguards:</span>
+          </div>
+          <p class="text-slate-300 font-sans text-xs leading-relaxed">${data.dueDiligence}</p>
+        </div>
+
+        <div class="flex flex-wrap items-center justify-between gap-3 pt-1 border-t border-white/10">
+          <div class="flex flex-wrap items-center gap-2">
+            <button onclick="applyInvestmentPreset('${data.preset}'); document.getElementById('valuation-simulator').scrollIntoView({ behavior: 'smooth' });" class="px-4 py-2 rounded-xl bg-neon-emerald hover:bg-emerald-400 text-slate-950 font-mono font-bold text-xs shadow-glow-emerald transition-all flex items-center gap-2">
+              <i class="fa-solid fa-calculator"></i>
+              <span>Simulate ${sectorKey === 'residential' ? 'Residential' : (sectorKey === 'commercial' ? 'Commercial' : (sectorKey === 'industrial' ? 'Industrial' : 'Institutional'))} Valuation</span>
+            </button>
+            <button onclick="focusDistrict('${data.district}'); scrollToTwin();" class="px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 border border-white/10 font-mono text-xs transition-all flex items-center gap-2">
+              <i class="fa-solid fa-cube text-neon-emerald"></i>
+              <span>Inspect on 3D Digital Twin</span>
+            </button>
+          </div>
+          <button onclick="openVerificationModal('${data.district}')" class="text-xs font-mono text-neon-emerald hover:underline flex items-center gap-1">
+            <span>Verify ${sectorKey} title at AGIS</span>
+            <i class="fa-solid fa-arrow-right text-[10px]"></i>
+          </button>
+        </div>
+      `;
+    }
+
+    // Title Security Multipliers
+    const TITLE_MULTIPLIER = {
+      cof_o: 1.0,
+      r_of_o: 0.88,
+      fcda_alloc: 0.82,
+      customary: 0.60
+    };
+
+    // =======================================================================
+    // Three.js Scene Variables & Setup
+    // =======================================================================
+    let scene, camera, renderer;
+    let terrainMesh, wireframeMesh, radarRing;
+    let buildingsGroup, particlesSystem, trafficParticles;
+    let dirLight, ambientLight, bluePointLight, goldPointLight;
+    let raycaster, mouse;
+    let isDragging = false;
+    let previousMousePosition = { x: 0, y: 0 };
+    let sphericalCoords = { radius: 45, theta: Math.PI / 4, phi: Math.PI / 3 };
+    let currentLookAt = new THREE.Vector3(0, 3, 0);
+    let targetLookAt = new THREE.Vector3(0, 3, 0);
+    let targetCamPos = new THREE.Vector3(0, 26, 40);
+    let fpsFrames = 0, lastFpsTime = performance.now();
+
+    // DOM Ready Initialization
+    window.addEventListener('DOMContentLoaded', () => {
+      initThreeEngine();
+      initUIListeners();
+      selectHomeSector('residential');
+      updateValuationCalculation();
+      
+      // Auto resize listener
+      window.addEventListener('resize', onWindowResize);
+    });
+
+    function initThreeEngine() {
+      const container = document.getElementById('three-container');
+      if (!container) return;
+
+      const width = container.clientWidth;
+      const height = container.clientHeight;
+
+      // 1. Scene
+      scene = new THREE.Scene();
+      scene.background = new THREE.Color(0x050811);
+      scene.fog = new THREE.FogExp2(0x050811, 0.015);
+
+      // 2. Camera
+      camera = new THREE.PerspectiveCamera(45, width / height, 0.1, 1000);
+      camera.position.set(0, 26, 40);
+      camera.lookAt(0, 2, 0);
+
+      // 3. Renderer
+      renderer = new THREE.WebGLRenderer({ antialias: true, alpha: false, powerPreference: 'high-performance' });
+      renderer.setSize(width, height);
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+      renderer.shadowMap.enabled = true;
+      renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+      container.appendChild(renderer.domElement);
+
+      // WebGL Context handlers
+      renderer.domElement.addEventListener('webglcontextlost', (e) => {
+        e.preventDefault();
+        console.warn('WebGL context lost.');
+      }, false);
+      renderer.domElement.addEventListener('webglcontextrestored', () => {
+        console.log('WebGL context restored.');
+        initThreeEngine();
+      }, false);
+
+      // 4. Lights
+      ambientLight = new THREE.AmbientLight(0x0c1428, 1.4);
+      scene.add(ambientLight);
+
+      dirLight = new THREE.DirectionalLight(0x00F5A0, 1.2);
+      dirLight.position.set(25, 40, 25);
+      dirLight.castShadow = true;
+      dirLight.shadow.mapSize.width = 1024;
+      dirLight.shadow.mapSize.height = 1024;
+      scene.add(dirLight);
+
+      bluePointLight = new THREE.PointLight(0x00D8F6, 2.5, 70);
+      bluePointLight.position.set(-15, 12, 10);
+      scene.add(bluePointLight);
+
+      goldPointLight = new THREE.PointLight(0xFFB800, 2.0, 70);
+      goldPointLight.position.set(15, 12, -10);
+      scene.add(goldPointLight);
+
+      // 5. Construct Procedural World Elements
+      createProceduralTerrain();
+      createProceduralCityBuildings();
+      createProceduralAsoRock();
+      createTrafficPulseNetwork();
+      createAtmosphericParticles();
+      createRadarScanningRing();
+
+      // 6. Raycaster
+      raycaster = new THREE.Raycaster();
+      mouse = new THREE.Vector2();
+
+      // 7. Interactive Mouse / Touch Orbit Controls
+      setupInteractiveOrbit(container);
+
+      // Hide loading overlay
+      const loader = document.getElementById('canvas-loading');
+      if (loader) {
+        loader.style.opacity = '0';
+        setTimeout(() => loader.remove(), 700);
+      }
+
+      // 8. Start 60 FPS Render Loop
+      animate();
+    }
+
+    // =======================================================================
+    // Procedural 3D World Generation
+    // =======================================================================
+
+    function createProceduralTerrain() {
+      const size = 120;
+      const segments = 70;
+      const geometry = new THREE.PlaneGeometry(size, size, segments, segments);
+      geometry.rotateX(-Math.PI / 2);
+
+      const pos = geometry.attributes.position;
+      for (let i = 0; i < pos.count; i++) {
+        const x = pos.getX(i);
+        const z = pos.getZ(i);
+
+        // Multi-frequency harmonic elevation simulating Abuja hills & valleys
+        let y = Math.sin(x * 0.08) * Math.cos(z * 0.08) * 2.5;
+        y += Math.sin(x * 0.03 + z * 0.03) * 3.0;
+
+        // Guzape elevated ridge on positive X, negative Z
+        if (x > 5 && z < 10) {
+          y += Math.min(6.5, (x - 5) * 0.4 + (10 - z) * 0.2);
+        }
+
+        // Maitama valley on negative X
+        if (x < -10) {
+          y += Math.cos(x * 0.1) * 1.5;
+        }
+
+        pos.setY(i, y);
+      }
+      geometry.computeVertexNormals();
+
+      // Solid Cyber-Glass Material
+      const terrainMat = new THREE.MeshStandardMaterial({
+        color: 0x070d1e,
+        roughness: 0.6,
+        metalness: 0.3,
+        flatShading: true
+      });
+
+      terrainMesh = new THREE.Mesh(geometry, terrainMat);
+      terrainMesh.receiveShadow = true;
+      scene.add(terrainMesh);
+
+      // Wireframe Overlay
+      const wireframeMat = new THREE.MeshBasicMaterial({
+        color: 0x00F5A0,
+        wireframe: true,
+        transparent: true,
+        opacity: 0.18
+      });
+      wireframeMesh = new THREE.Mesh(geometry, wireframeMat);
+      wireframeMesh.position.y += 0.04;
+      scene.add(wireframeMesh);
+
+      // Grid Base Plane
+      const gridHelper = new THREE.GridHelper(120, 40, 0x00F5A0, 0x111c38);
+      gridHelper.position.y = -0.5;
+      scene.add(gridHelper);
+    }
+
+    function createProceduralAsoRock() {
+      // Stylized representation of the iconic Aso Rock monolith behind Abuja
+      const rockGeo = new THREE.DodecahedronGeometry(12, 2);
+      const pos = rockGeo.attributes.position;
+      for (let i = 0; i < pos.count; i++) {
+        const x = pos.getX(i);
+        const y = pos.getY(i);
+        const z = pos.getZ(i);
+        // Distort into massive elongated granite monolith
+        pos.setXYZ(i, x * 1.8, Math.max(0, y * 1.5 + Math.sin(x * 0.5) * 2), z * 0.9);
+      }
+      rockGeo.computeVertexNormals();
+
+      const rockMat = new THREE.MeshStandardMaterial({
+        color: 0x161e36,
+        roughness: 0.8,
+        metalness: 0.2,
+        flatShading: true
+      });
+
+      const asoRock = new THREE.Mesh(rockGeo, rockMat);
+      asoRock.position.set(0, 6, -38);
+      scene.add(asoRock);
+
+      // Wireframe crest for Aso Rock
+      const crestWire = new THREE.WireframeGeometry(rockGeo);
+      const crestLine = new THREE.LineSegments(crestWire, new THREE.LineBasicMaterial({ color: 0xFFB800, opacity: 0.3, transparent: true }));
+      crestLine.position.copy(asoRock.position);
+      scene.add(crestLine);
+    }
+
+    function createProceduralCityBuildings() {
+      buildingsGroup = new THREE.Group();
+
+      // Materials for buildings
+      const glassMat = new THREE.MeshStandardMaterial({
+        color: 0x0a1428,
+        roughness: 0.1,
+        metalness: 0.8,
+        transparent: true,
+        opacity: 0.88
+      });
+
+      const accentMat = new THREE.MeshStandardMaterial({
+        color: 0x00D8F6,
+        emissive: 0x00D8F6,
+        emissiveIntensity: 0.4,
+        roughness: 0.2,
+        metalness: 0.5
+      });
+
+      const goldTowerMat = new THREE.MeshStandardMaterial({
+        color: 0xFFB800,
+        emissive: 0xFFB800,
+        emissiveIntensity: 0.35,
+        roughness: 0.3,
+        metalness: 0.6
+      });
+
+      // 1. Central Business District (CBD) Skyscraper Cluster (Centered around x:0, z:0)
+      const cbdConfigs = [
+        { x: 0, z: 0, w: 3.5, d: 3.5, h: 18, mat: glassMat, zone: 'CBD Commercial', id: 'CBD-NNPC-01' },
+        { x: 4.5, z: 2, w: 3.0, d: 3.0, h: 14, mat: accentMat, zone: 'CBD Financial', id: 'CBD-CBN-HQ' },
+        { x: -4, z: 1.5, w: 2.8, d: 3.2, h: 16, mat: glassMat, zone: 'CBD Towers', id: 'CBD-FCDA-CTR' },
+        { x: -1.5, z: -4.5, w: 3.2, d: 2.5, h: 12, mat: glassMat, zone: 'CBD Corporate', id: 'CBD-SEC-09' },
+        { x: 3.5, z: -3.5, w: 2.5, d: 2.5, h: 10, mat: glassMat, zone: 'CBD Office', id: 'CBD-MIN-HOUSING' },
+        { x: -5.5, z: -3, w: 2.2, d: 2.2, h: 9, mat: glassMat, zone: 'CBD Mixed', id: 'CBD-TRADE-04' },
+        { x: 6, z: -1, w: 2.4, d: 2.4, h: 11, mat: glassMat, zone: 'CBD Commercial', id: 'CBD-BANK-CTR' }
+      ];
+
+      cbdConfigs.forEach(cfg => {
+        const geo = new THREE.BoxGeometry(cfg.w, cfg.h, cfg.d);
+        const mesh = new THREE.Mesh(geo, cfg.mat);
+        mesh.position.set(cfg.x, cfg.h / 2 + 1, cfg.z);
+        mesh.castShadow = true;
+        mesh.receiveShadow = true;
+        mesh.userData = { parcelId: cfg.id, zone: cfg.zone, district: 'cbd', baseRate: '₦720,000 / sqm', yield: '8.7%' };
+        
+        // Edge wire highlight
+        const edges = new THREE.EdgesGeometry(geo);
+        const line = new THREE.LineSegments(edges, new THREE.LineBasicMaterial({ color: 0x00F5A0, opacity: 0.6, transparent: true }));
+        mesh.add(line);
+
+        buildingsGroup.add(mesh);
+      });
+
+      // 2. Maitama Diplomatic & Luxury District Cluster (West: x: -12 to -22, z: 4 to 12)
+      for (let i = 0; i < 18; i++) {
+        const mx = -10 - (i % 5) * 3.2 - Math.random() * 1.5;
+        const mz = 2 + Math.floor(i / 5) * 4.2 + Math.random() * 1.5;
+        const mw = 2.2 + Math.random() * 1.2;
+        const md = 2.2 + Math.random() * 1.2;
+        const mh = 3.5 + Math.random() * 5.5;
+
+        const geo = new THREE.BoxGeometry(mw, mh, md);
+        const mesh = new THREE.Mesh(geo, glassMat);
+        mesh.position.set(mx, mh / 2 + 1.2, mz);
+        mesh.castShadow = true;
+        mesh.userData = { parcelId: `MAIT-DIP-${100 + i}`, zone: 'Maitama Diplomatic', district: 'maitama', baseRate: '₦550,000 / sqm', yield: '7.8%' };
+        
+        const edges = new THREE.EdgesGeometry(geo);
+        const line = new THREE.LineSegments(edges, new THREE.LineBasicMaterial({ color: 0x00D8F6, opacity: 0.5, transparent: true }));
+        mesh.add(line);
+
+        buildingsGroup.add(mesh);
+      }
+
+      // 3. Guzape Ridge Terraced Mansions Cluster (East: x: 10 to 22, z: -4 to 8)
+      for (let i = 0; i < 14; i++) {
+        const gx = 10 + (i % 4) * 3.5 + Math.random() * 1.5;
+        const gz = -4 + Math.floor(i / 4) * 4.0;
+        const gw = 2.5 + Math.random() * 1.5;
+        const gd = 2.5 + Math.random() * 1.5;
+        const gh = 4.0 + Math.random() * 4.5;
+
+        const geo = new THREE.BoxGeometry(gw, gh, gd);
+        const mesh = new THREE.Mesh(geo, i % 3 === 0 ? goldTowerMat : glassMat);
+        mesh.position.set(gx, gh / 2 + 3.5, gz);
+        mesh.castShadow = true;
+        mesh.userData = { parcelId: `GUZ-RDG-${200 + i}`, zone: 'Guzape Topographical', district: 'guzape', baseRate: '₦340,000 / sqm', yield: '9.2%' };
+
+        const edges = new THREE.EdgesGeometry(geo);
+        const line = new THREE.LineSegments(edges, new THREE.LineBasicMaterial({ color: 0xFFB800, opacity: 0.6, transparent: true }));
+        mesh.add(line);
+
+        buildingsGroup.add(mesh);
+      }
+
+      // 4. Stylized Landmark Minaret/Spire (National Mosque / Centre symbol)
+      const domeGeo = new THREE.SphereGeometry(1.8, 16, 16, 0, Math.PI * 2, 0, Math.PI / 2);
+      const domeMesh = new THREE.Mesh(domeGeo, goldTowerMat);
+      domeMesh.position.set(-3, 6, -8);
+      buildingsGroup.add(domeMesh);
+
+      const minaretGeo = new THREE.CylinderGeometry(0.3, 0.4, 14, 8);
+      const minaretMesh = new THREE.Mesh(minaretGeo, glassMat);
+      minaretMesh.position.set(-3, 7, -8);
+      buildingsGroup.add(minaretMesh);
+
+      scene.add(buildingsGroup);
+    }
+
+    function createTrafficPulseNetwork() {
+      // Create glowing highway pulse particles along key arteries
+      const particleCount = 450;
+      const geometry = new THREE.BufferGeometry();
+      const positions = new Float32Array(particleCount * 3);
+      const colors = new Float32Array(particleCount * 3);
+
+      const cEmerald = new THREE.Color(0x00F5A0);
+      const cBlue = new THREE.Color(0x00D8F6);
+
+      for (let i = 0; i < particleCount; i++) {
+        // Linear highway corridor from Airport road (Z: 30 to -30)
+        const t = (i / particleCount) * 60 - 30;
+        const x = Math.sin(t * 0.1) * 4 + (Math.random() - 0.5) * 1.5;
+        const z = t;
+        const y = 0.5 + Math.random() * 0.4;
+
+        positions[i * 3] = x;
+        positions[i * 3 + 1] = y;
+        positions[i * 3 + 2] = z;
+
+        const c = Math.random() > 0.5 ? cEmerald : cBlue;
+        colors[i * 3] = c.r;
+        colors[i * 3 + 1] = c.g;
+        colors[i * 3 + 2] = c.b;
+      }
+
+      geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+      geometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
+
+      const mat = new THREE.PointsMaterial({
+        size: 0.6,
+        vertexColors: true,
+        transparent: true,
+        opacity: 0.85,
+        blending: THREE.AdditiveBlending
+      });
+
+      trafficParticles = new THREE.Points(geometry, mat);
+      scene.add(trafficParticles);
+    }
+
+    function createAtmosphericParticles() {
+      const count = 300;
+      const geo = new THREE.BufferGeometry();
+      const pos = new Float32Array(count * 3);
+
+      for (let i = 0; i < count; i++) {
+        pos[i * 3] = (Math.random() - 0.5) * 80;
+        pos[i * 3 + 1] = 5 + Math.random() * 25;
+        pos[i * 3 + 2] = (Math.random() - 0.5) * 80;
+      }
+      geo.setAttribute('position', new THREE.BufferAttribute(pos, 3));
+
+      const mat = new THREE.PointsMaterial({
+        size: 0.35,
+        color: 0x00F5A0,
+        transparent: true,
+        opacity: 0.4,
+        blending: THREE.AdditiveBlending
+      });
+
+      particlesSystem = new THREE.Points(geo, mat);
+      scene.add(particlesSystem);
+    }
+
+    function createRadarScanningRing() {
+      const ringGeo = new THREE.RingGeometry(0.1, 0.4, 64);
+      ringGeo.rotateX(-Math.PI / 2);
+      const ringMat = new THREE.MeshBasicMaterial({
+        color: 0x00F5A0,
+        side: THREE.DoubleSide,
+        transparent: true,
+        opacity: 0.7,
+        blending: THREE.AdditiveBlending
+      });
+      radarRing = new THREE.Mesh(ringGeo, ringMat);
+      radarRing.position.set(0, 0.2, 0);
+      scene.add(radarRing);
+    }
+
+    // =======================================================================
+    // Interactive Camera Orbit & Mouse/Touch Controller
+    // =======================================================================
+    function setupInteractiveOrbit(container) {
+      container.addEventListener('mousedown', (e) => {
+        isDragging = true;
+        previousMousePosition = { x: e.clientX, y: e.clientY };
+      });
+
+      window.addEventListener('mousemove', (e) => {
+        if (!isDragging) {
+          // Raycaster hover check
+          const rect = container.getBoundingClientRect();
+          if (e.clientX >= rect.left && e.clientX <= rect.right && e.clientY >= rect.top && e.clientY <= rect.bottom) {
+            mouse.x = ((e.clientX - rect.left) / container.clientWidth) * 2 - 1;
+            mouse.y = -((e.clientY - rect.top) / container.clientHeight) * 2 + 1;
+          }
+          return;
+        }
+
+        const deltaX = e.clientX - previousMousePosition.x;
+        const deltaY = e.clientY - previousMousePosition.y;
+
+        sphericalCoords.theta -= deltaX * 0.007;
+        sphericalCoords.phi = Math.max(0.15, Math.min(Math.PI / 2 - 0.05, sphericalCoords.phi - deltaY * 0.007));
+
+        previousMousePosition = { x: e.clientX, y: e.clientY };
+        APP_STATE.autoRotate = false;
+        document.getElementById('autorotate-status').textContent = 'Orbit: OFF';
+      });
+
+      window.addEventListener('mouseup', () => { isDragging = false; });
+
+      // Click to inspect building
+      container.addEventListener('click', (e) => {
+        const rect = container.getBoundingClientRect();
+        mouse.x = ((e.clientX - rect.left) / container.clientWidth) * 2 - 1;
+        mouse.y = -((e.clientY - rect.top) / container.clientHeight) * 2 + 1;
+
+        raycaster.setFromCamera(mouse, camera);
+        const intersects = raycaster.intersectObjects(buildingsGroup.children);
+        if (intersects.length > 0) {
+          const hit = intersects[0].object;
+          if (hit.userData && hit.userData.parcelId) {
+            APP_STATE.activeParcel = hit.userData;
+            document.getElementById('hud-parcel-id').textContent = hit.userData.parcelId;
+            document.getElementById('hud-zone-type').textContent = hit.userData.zone;
+            document.getElementById('hud-land-value').textContent = hit.userData.baseRate;
+            document.getElementById('hud-yield').textContent = hit.userData.yield;
+
+            // Highlight pulse
+            if (hit.material && hit.material.emissive) {
+              const orig = hit.material.emissiveIntensity;
+              hit.material.emissiveIntensity = 1.0;
+              setTimeout(() => { hit.material.emissiveIntensity = orig; }, 300);
+            }
+          }
+        }
+      });
+
+      // Scroll Zoom
+      container.addEventListener('wheel', (e) => {
+        e.preventDefault();
+        sphericalCoords.radius = Math.max(12, Math.min(75, sphericalCoords.radius + e.deltaY * 0.04));
+      }, { passive: false });
+
+      // Mobile Touch Handling with 1-finger orbit & 2-finger pinch-to-zoom
+      let touchStartX = 0, touchStartY = 0;
+      let initialPinchDist = null;
+      let initialRadius = sphericalCoords.radius;
+
+      container.addEventListener('touchstart', (e) => {
+        if (e.touches.length === 1) {
+          touchStartX = e.touches[0].clientX;
+          touchStartY = e.touches[0].clientY;
+          isDragging = true;
+          initialPinchDist = null;
+        } else if (e.touches.length === 2) {
+          isDragging = false;
+          const dx = e.touches[0].clientX - e.touches[1].clientX;
+          const dy = e.touches[0].clientY - e.touches[1].clientY;
+          initialPinchDist = Math.hypot(dx, dy);
+          initialRadius = sphericalCoords.radius;
+        }
+      }, { passive: true });
+
+      container.addEventListener('touchmove', (e) => {
+        if (e.touches.length === 1 && isDragging) {
+          const deltaX = e.touches[0].clientX - touchStartX;
+          const deltaY = e.touches[0].clientY - touchStartY;
+          sphericalCoords.theta -= deltaX * 0.007;
+          sphericalCoords.phi = Math.max(0.15, Math.min(Math.PI / 2 - 0.05, sphericalCoords.phi - deltaY * 0.007));
+          touchStartX = e.touches[0].clientX;
+          touchStartY = e.touches[0].clientY;
+          APP_STATE.autoRotate = false;
+        } else if (e.touches.length === 2 && initialPinchDist) {
+          const dx = e.touches[0].clientX - e.touches[1].clientX;
+          const dy = e.touches[0].clientY - e.touches[1].clientY;
+          const dist = Math.hypot(dx, dy);
+          if (dist > 10) {
+            const factor = initialPinchDist / dist;
+            sphericalCoords.radius = Math.max(12, Math.min(75, initialRadius * factor));
+            APP_STATE.autoRotate = false;
+          }
+        }
+      }, { passive: true });
+
+      container.addEventListener('touchend', () => { 
+        isDragging = false; 
+        initialPinchDist = null;
+      });
+    }
+
+    // =======================================================================
+    // 60 FPS Render Loop
+    // =======================================================================
+    function animate() {
+      requestAnimationFrame(animate);
+
+      const time = performance.now() * 0.001;
+
+      // 1. Auto-rotation if enabled
+      if (APP_STATE.autoRotate && !isDragging) {
+        sphericalCoords.theta += 0.003;
+      }
+
+      // 2. Camera spherical interpolation
+      if (!isDragging && APP_STATE.cameraTargetPos) {
+        targetCamPos.x = currentLookAt.x + sphericalCoords.radius * Math.sin(sphericalCoords.phi) * Math.sin(sphericalCoords.theta);
+        targetCamPos.y = currentLookAt.y + sphericalCoords.radius * Math.cos(sphericalCoords.phi);
+        targetCamPos.z = currentLookAt.z + sphericalCoords.radius * Math.sin(sphericalCoords.phi) * Math.cos(sphericalCoords.theta);
+      }
+
+      // Smooth camera position lerp
+      camera.position.lerp(targetCamPos, 0.05);
+      currentLookAt.lerp(targetLookAt, 0.05);
+      camera.lookAt(currentLookAt);
+
+      // 3. Traffic Particles movement
+      if (trafficParticles) {
+        const pos = trafficParticles.geometry.attributes.position;
+        for (let i = 0; i < pos.count; i++) {
+          let z = pos.getZ(i);
+          z += 0.15;
+          if (z > 30) z = -30;
+          pos.setZ(i, z);
+        }
+        pos.needsUpdate = true;
+      }
+
+      // 4. Scanning Radar Ring animation
+      if (radarRing) {
+        let scale = (time * 1.5) % 8;
+        radarRing.scale.set(scale * 3.5, scale * 3.5, 1);
+        radarRing.material.opacity = Math.max(0, 0.7 - scale * 0.09);
+      }
+
+      // 5. Atmospheric dust gentle drift
+      if (particlesSystem) {
+        particlesSystem.rotation.y = time * 0.02;
+      }
+
+      // 6. Project 3D District Marker Tags to 2D Screen Overlay
+      updateScreenDistrictMarkers();
+
+      // 7. FPS Calculation
+      fpsFrames++;
+      if (performance.now() - lastFpsTime >= 1000) {
+        const fpsEl = document.getElementById('fps-counter');
+        if (fpsEl) fpsEl.textContent = `${fpsFrames} FPS`;
+        fpsFrames = 0;
+        lastFpsTime = performance.now();
+      }
+
+      renderer.render(scene, camera);
+    }
+
+    // 3D District Anchor Points for Real-Time HUD Projection
+    const DISTRICT_MARKERS_DATA = [
+      { id: 'cbd', name: 'CBD Zone A00', pos: new THREE.Vector3(0, 17, 0), color: '#00F5A0' },
+      { id: 'maitama', name: 'Maitama Zone A05', pos: new THREE.Vector3(-14, 10, 8), color: '#00D8F6' },
+      { id: 'guzape', name: 'Guzape Ridge A09', pos: new THREE.Vector3(16, 11, 2), color: '#FFB800' },
+      { id: 'katampe', name: 'Katampe Zone B19', pos: new THREE.Vector3(-12, 9, -8), color: '#a78bfa' },
+      { id: 'jabi', name: 'Jabi Lakefront B04', pos: new THREE.Vector3(8, 9, 12), color: '#38bdf8' },
+      { id: 'idu', name: 'Idu Industrial Zone', pos: new THREE.Vector3(18, 9, 14), color: '#c084fc' },
+      { id: 'overview', name: 'Aso Rock Monolith', pos: new THREE.Vector3(0, 16, -38), color: '#fbbf24' }
+    ];
+
+    function updateScreenDistrictMarkers() {
+      const container = document.getElementById('district-tags-layer');
+      if (!container || !camera) return;
+
+      const halfW = container.clientWidth / 2;
+      const halfH = container.clientHeight / 2;
+
+      DISTRICT_MARKERS_DATA.forEach(item => {
+        let el = document.getElementById(`tag-marker-${item.id}`);
+        if (!el) {
+          el = document.createElement('div');
+          el.id = `tag-marker-${item.id}`;
+          el.className = 'absolute pointer-events-auto cursor-pointer group -translate-x-1/2 -translate-y-full';
+          el.innerHTML = `
+            <button onclick="focusDistrict('${item.id}')" class="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-[#050811]/90 border border-white/20 hover:border-neon-emerald shadow-lg backdrop-blur-md text-[10px] font-mono text-white transition-all group-hover:scale-105" title="Focus ${item.name}">
+              <span class="w-1.5 h-1.5 rounded-full" style="background-color: ${item.color}; box-shadow: 0 0 8px ${item.color}"></span>
+              <span class="font-bold">${item.name}</span>
+            </button>
+            <div class="w-0.5 h-2.5 mx-auto" style="background: linear-gradient(to bottom, ${item.color}, transparent)"></div>
+          `;
+          container.appendChild(el);
+        }
+
+        const screenPos = item.pos.clone().project(camera);
+        // Ensure marker is in front of camera
+        if (screenPos.z < 1) {
+          const x = (screenPos.x * halfW) + halfW;
+          const y = (-(screenPos.y * halfH)) + halfH;
+          el.style.left = `${Math.round(x)}px`;
+          el.style.top = `${Math.round(y)}px`;
+          el.style.display = 'block';
+        } else {
+          el.style.display = 'none';
+        }
+      });
+    }
+
+    function onWindowResize() {
+      const container = document.getElementById('three-container');
+      if (!container || !renderer || !camera) return;
+
+      const width = container.clientWidth;
+      const height = container.clientHeight;
+
+      camera.aspect = width / height;
+      camera.updateProjectionMatrix();
+      renderer.setSize(width, height);
+    }
+
+    function loadInspectedParcelToSimulator() {
+      const p = APP_STATE.activeParcel || { district: 'cbd', zone: 'CBD Commercial', baseRate: '₦720,000 / sqm' };
+      const dist = p.district || 'cbd';
+      setSimDistrict(dist);
+
+      // Set suitable estimated area based on typology
+      const suggestedArea = dist === 'cbd' ? 3500 : (dist === 'maitama' ? 2200 : 3000);
+      setAreaPreset(suggestedArea);
+
+      // Scroll to simulator
+      const simSection = document.getElementById('valuation-simulator');
+      if (simSection) {
+        simSection.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+
+    // =======================================================================
+    // District Focus & Camera Telemetry
+    // =======================================================================
+    function focusDistrict(distKey) {
+      const data = DISTRICT_RATES[distKey];
+      if (!data) return;
+
+      APP_STATE.selectedDistrict = distKey;
+
+      // Update button visual state
+      document.querySelectorAll('.dist-btn').forEach(btn => {
+        btn.classList.remove('bg-neon-emerald/20', 'text-neon-emerald', 'border-neon-emerald/40');
+        btn.classList.add('text-slate-300');
+      });
+      const activeBtn = document.getElementById(`btn-dist-${distKey}`);
+      if (activeBtn) {
+        activeBtn.classList.add('bg-neon-emerald/20', 'text-neon-emerald', 'border-neon-emerald/40');
+        activeBtn.classList.remove('text-slate-300');
+      }
+
+      // Smooth camera transition
+      targetCamPos.copy(data.camera.pos);
+      targetLookAt.copy(data.camera.look);
+
+      // Update spherical radius and angles to match
+      const offset = new THREE.Vector3().subVectors(data.camera.pos, data.camera.look);
+      sphericalCoords.radius = offset.length();
+      sphericalCoords.phi = Math.acos(offset.y / sphericalCoords.radius);
+      sphericalCoords.theta = Math.atan2(offset.x, offset.z);
+
+      // Update HUD
+      document.getElementById('hud-district-name').textContent = data.name;
+      document.getElementById('hud-land-value').textContent = `₦${data.baseRate.toLocaleString()} / sqm`;
+      document.getElementById('hud-yield').textContent = `${data.yield}% p.a.`;
+      document.getElementById('hud-rap-risk').textContent = `${data.rapRisk} (${data.rapTier})`;
+
+      // Also align the simulator if requested
+      if (distKey !== 'overview') {
+        setSimDistrict(distKey);
+      }
+    }
+
+    // =======================================================================
+    // Wireframe & Lighting Modes
+    // =======================================================================
+    function toggleWireframe() {
+      APP_STATE.wireframeMode = !APP_STATE.wireframeMode;
+      const statusEl = document.getElementById('wireframe-status');
+
+      if (APP_STATE.wireframeMode) {
+        terrainMesh.material.wireframe = true;
+        wireframeMesh.material.opacity = 0.6;
+        statusEl.textContent = 'Wireframe: ON';
+        statusEl.classList.add('text-neon-emerald');
+      } else {
+        terrainMesh.material.wireframe = false;
+        wireframeMesh.material.opacity = 0.18;
+        statusEl.textContent = 'Wireframe: OFF';
+        statusEl.classList.remove('text-neon-emerald');
+      }
+    }
+
+    function toggleLighting() {
+      const statusEl = document.getElementById('lighting-status');
+      
+      if (APP_STATE.lightingMode === 'cyber_night') {
+        // Switch to Sunset / Twilight
+        APP_STATE.lightingMode = 'sunset';
+        scene.background.setHex(0x12081a);
+        scene.fog.color.setHex(0x12081a);
+        dirLight.color.setHex(0xFFB800);
+        dirLight.intensity = 1.8;
+        ambientLight.color.setHex(0x2d1138);
+        statusEl.textContent = 'Twilight Sunset';
+      } else if (APP_STATE.lightingMode === 'sunset') {
+        // Switch to Technical Daylight
+        APP_STATE.lightingMode = 'daylight';
+        scene.background.setHex(0x0e172a);
+        scene.fog.color.setHex(0x0e172a);
+        dirLight.color.setHex(0xffffff);
+        dirLight.intensity = 2.2;
+        ambientLight.color.setHex(0x1e293b);
+        statusEl.textContent = 'Day Technical';
+      } else {
+        // Switch back to Cyber Night
+        APP_STATE.lightingMode = 'cyber_night';
+        scene.background.setHex(0x050811);
+        scene.fog.color.setHex(0x050811);
+        dirLight.color.setHex(0x00F5A0);
+        dirLight.intensity = 1.2;
+        ambientLight.color.setHex(0x0c1428);
+        statusEl.textContent = 'Cyber Night';
+      }
+    }
+
+    function toggleAutoRotate() {
+      APP_STATE.autoRotate = !APP_STATE.autoRotate;
+      const statusEl = document.getElementById('autorotate-status');
+      statusEl.textContent = APP_STATE.autoRotate ? 'Orbit: ON' : 'Orbit: OFF';
+    }
+
+    // =======================================================================
+    // Valuation & RAP Advisory Simulator Calculations
+    // =======================================================================
+    function setSimDistrict(distKey) {
+      APP_STATE.selectedDistrict = distKey;
+      
+      document.querySelectorAll('.sim-dist-btn').forEach(btn => {
+        if (btn.dataset.dist === distKey) {
+          btn.classList.add('border-neon-emerald', 'bg-neon-emerald/10');
+          btn.classList.remove('border-white/10', 'bg-slate-900/50');
+        } else {
+          btn.classList.remove('border-neon-emerald', 'bg-neon-emerald/10');
+          btn.classList.add('border-white/10', 'bg-slate-900/50');
+        }
+      });
+
+      updateValuationCalculation();
+    }
+
+    function setAreaPreset(sqm) {
+      document.getElementById('input-land-area').value = sqm;
+      updateValuationCalculation();
+    }
+
+    function setPapPreset(count) {
+      document.getElementById('input-pap-count').value = count;
+      updateValuationCalculation();
+    }
+
+    function applyInvestmentPreset(scenarioKey) {
+      if (scenarioKey === 'duplex_guzape') {
+        setSimDistrict('guzape');
+        document.getElementById('input-land-area').value = 1000;
+        document.getElementById('select-dev-type').value = 'residential';
+        document.getElementById('select-title-status').value = 'cof_o';
+        document.getElementById('input-pap-count').value = 0;
+      } else if (scenarioKey === 'plaza_cbd') {
+        setSimDistrict('cbd');
+        document.getElementById('input-land-area').value = 2500;
+        document.getElementById('select-dev-type').value = 'commercial';
+        document.getElementById('select-title-status').value = 'cof_o';
+        document.getElementById('input-pap-count').value = 0;
+      } else if (scenarioKey === 'estate_katampe') {
+        setSimDistrict('katampe');
+        document.getElementById('input-land-area').value = 10000;
+        document.getElementById('select-dev-type').value = 'residential';
+        document.getElementById('select-title-status').value = 'r_of_o';
+        document.getElementById('input-pap-count').value = 15;
+      } else if (scenarioKey === 'mansion_maitama') {
+        setSimDistrict('maitama');
+        document.getElementById('input-land-area').value = 3500;
+        document.getElementById('select-dev-type').value = 'residential';
+        document.getElementById('select-title-status').value = 'cof_o';
+        document.getElementById('input-pap-count').value = 0;
+      } else if (scenarioKey === 'industrial_idu') {
+        setSimDistrict('idu');
+        document.getElementById('input-land-area').value = 10000;
+        document.getElementById('select-dev-type').value = 'industrial';
+        document.getElementById('select-title-status').value = 'cof_o';
+        document.getElementById('input-pap-count').value = 0;
+      } else if (scenarioKey === 'civic_ngo') {
+        setSimDistrict('maitama');
+        document.getElementById('input-land-area').value = 5000;
+        document.getElementById('select-dev-type').value = 'institutional_nfp';
+        document.getElementById('select-title-status').value = 'cof_o';
+        document.getElementById('input-pap-count').value = 0;
+      }
+
+      // Update preset buttons styling
+      document.querySelectorAll('.preset-btn').forEach(btn => {
+        if (btn.dataset.preset === scenarioKey) {
+          btn.classList.add('border-neon-emerald', 'bg-neon-emerald/20', 'text-white');
+          btn.classList.remove('border-white/10', 'bg-slate-900/60');
+        } else {
+          btn.classList.remove('border-neon-emerald', 'bg-neon-emerald/20', 'text-white');
+          btn.classList.add('border-white/10', 'bg-slate-900/60');
+        }
+      });
+
+      updateValuationCalculation();
+    }
+
+    function resetValuationDefaults() {
+      setSimDistrict('maitama');
+      document.getElementById('input-land-area').value = 2500;
+      document.getElementById('select-dev-type').value = 'residential';
+      document.getElementById('select-title-status').value = 'cof_o';
+      document.getElementById('input-pap-count').value = 0;
+      setCurrency('NGN');
+      
+      document.querySelectorAll('.preset-btn').forEach(btn => {
+        btn.classList.remove('border-neon-emerald', 'bg-neon-emerald/20', 'text-white');
+        btn.classList.add('border-white/10', 'bg-slate-900/60');
+      });
+
+      updateValuationCalculation();
+    }
+
+    function updateValuationCalculation() {
+      const distKey = APP_STATE.selectedDistrict || 'maitama';
+      const distInfo = DISTRICT_RATES[distKey] || DISTRICT_RATES.maitama;
+
+      const area = parseInt(document.getElementById('input-land-area').value, 10);
+      document.getElementById('slider-area-val').textContent = area.toLocaleString();
+      APP_STATE.landAreaSqm = area;
+
+      const devType = document.getElementById('select-dev-type').value;
+      const titleStatus = document.getElementById('select-title-status').value;
+      const papCount = Math.max(0, parseInt(document.getElementById('input-pap-count').value, 10) || 0);
+
+      // Financial Calculation
+      const baseDistrictRate = distInfo.baseRate;
+      const typeFactor = TYPOLOGY_MULTIPLIER[devType] || 1.0;
+      const titleFactor = TITLE_MULTIPLIER[titleStatus] || 1.0;
+
+      const effectiveRatePerSqm = Math.round(baseDistrictRate * typeFactor * titleFactor);
+      const openMarketValue = effectiveRatePerSqm * area;
+      const forcedSaleValue = Math.round(openMarketValue * 0.75); // Standard Nigerian banking valuation benchmark
+
+      // Statutory NIESV scale fee approximation (graduated scale)
+      let appraisalFee = 0;
+      if (openMarketValue <= 100000000) {
+        appraisalFee = openMarketValue * 0.02;
+      } else if (openMarketValue <= 500000000) {
+        appraisalFee = 2000000 + (openMarketValue - 100000000) * 0.0125;
+      } else {
+        appraisalFee = 7000000 + (openMarketValue - 500000000) * 0.0075;
+      }
+      appraisalFee = Math.round(appraisalFee);
+
+      // Yield calculation factoring asset sector
+      let yieldMultiplier = 0.95;
+      if (devType === 'commercial') yieldMultiplier = 1.15;
+      else if (devType === 'industrial') yieldMultiplier = 1.25;
+      else if (devType === 'institutional_nfp') yieldMultiplier = 0.70;
+      
+      const calculatedYield = (distInfo.yield * yieldMultiplier).toFixed(1);
+      const annualRent = Math.round(openMarketValue * (parseFloat(calculatedYield) / 100));
+
+      // Resettlement Action Plan (RAP) calculation
+      // Compensation benchmark approx. ₦3,000,000 per displaced entity
+      const rapBudget = papCount * 3000000;
+      let rapRiskBadge = 'Clean Plot · Zero Risk';
+      let rapBadgeClass = 'bg-emerald-500/20 text-emerald-300 border-emerald-500/30';
+
+      if (titleStatus === 'customary' || papCount > 80) {
+        rapRiskBadge = 'Severe Safeguard Concern · Cat A';
+        rapBadgeClass = 'bg-rose-500/20 text-rose-300 border-rose-500/30';
+      } else if (titleStatus === 'fcda_alloc' || papCount > 25) {
+        rapRiskBadge = 'Moderate Safeguard Risk · Cat B+';
+        rapBadgeClass = 'bg-amber-500/20 text-amber-300 border-amber-500/30';
+      } else if (papCount > 0) {
+        rapRiskBadge = 'Low Risk · Category B';
+        rapBadgeClass = 'bg-emerald-500/20 text-emerald-300 border-emerald-500/30';
+      }
+
+      // Update DOM with multi-currency formatted values
+      document.getElementById('out-omv-naira').textContent = formatCurrency(openMarketValue);
+      document.getElementById('out-omv-words').textContent = formatWordsForCurrency(openMarketValue);
+      document.getElementById('out-fsv-naira').textContent = formatCurrency(forcedSaleValue);
+      document.getElementById('out-sqm-rate').textContent = `${formatCurrency(effectiveRatePerSqm)} / sqm`;
+      document.getElementById('out-annual-rent').textContent = `${formatCurrency(annualRent)} / yr`;
+      document.getElementById('out-yield-percent').textContent = `${calculatedYield}% p.a.`;
+      document.getElementById('out-appraisal-fee').textContent = formatCurrency(appraisalFee);
+
+      // RAP Output
+      document.getElementById('out-rap-compensation').textContent = formatCurrency(rapBudget);
+      const badgeEl = document.getElementById('out-rap-badge');
+      badgeEl.textContent = rapRiskBadge;
+      badgeEl.className = `text-[11px] font-mono px-2 py-0.5 rounded font-semibold border ${rapBadgeClass}`;
+
+      updateTitleHelpText();
+    }
+
+    function updateTitleHelpText() {
+      const statusEl = document.getElementById('select-title-status');
+      const helpEl = document.getElementById('title-plain-help');
+      if (!statusEl || !helpEl) return;
+      const status = statusEl.value;
+
+      if (status === 'cof_o') {
+        helpEl.innerHTML = '<i class="fa-solid fa-circle-check text-neon-emerald mt-0.5 shrink-0"></i><span><strong>C of O:</strong> The gold standard title in Nigeria. Recognized by all banks for loans and lowest legal risk.</span>';
+      } else if (status === 'r_of_o') {
+        helpEl.innerHTML = '<i class="fa-solid fa-triangle-exclamation text-imperial-gold mt-0.5 shrink-0"></i><span><strong>R of O:</strong> Preliminary offer grant. Legally valid, but must be regularized at AGIS into a substantive C of O.</span>';
+      } else if (status === 'fcda_alloc') {
+        helpEl.innerHTML = '<i class="fa-solid fa-file-circle-exclamation text-electric-blue mt-0.5 shrink-0"></i><span><strong>FCDA Allocation:</strong> Ministerial letter. Crucial to verify at AGIS that ground fees are paid and no counter-allocations exist.</span>';
+      } else {
+        helpEl.innerHTML = '<i class="fa-solid fa-shield-halved text-rose-400 mt-0.5 shrink-0"></i><span><strong>Customary Excision:</strong> Ancestral village grant. High risk of native disputes unless backed by formal gazette &amp; RAP framework.</span>';
+      }
+    }
+
+    function formatWordsForCurrency(numNaira) {
+      const curr = APP_STATE.currency || 'NGN';
+      if (curr === 'USD') {
+        const usd = Math.round(numNaira / 1450);
+        if (usd >= 1000000) return `Approx. $${(usd / 1000000).toFixed(2)}M USD (at ₦1,450/$)`;
+        return `Approx. $${usd.toLocaleString()} USD (at ₦1,450/$)`;
+      } else if (curr === 'GBP') {
+        const gbp = Math.round(numNaira / 1900);
+        if (gbp >= 1000000) return `Approx. £${(gbp / 1000000).toFixed(2)}M GBP (at ₦1,900/£)`;
+        return `Approx. £${gbp.toLocaleString()} GBP (at ₦1,900/£)`;
+      }
+
+      if (numNaira >= 1000000000) {
+        const billions = (numNaira / 1000000000).toFixed(2);
+        return `Approx. ₦${billions} Billion Naira`;
+      } else if (numNaira >= 1000000) {
+        const millions = (numNaira / 1000000).toFixed(1);
+        return `Approx. ₦${millions} Million Naira`;
+      }
+      return `Approx. ₦${numNaira.toLocaleString()} Naira`;
+    }
+
+    function shareValuationOnWhatsApp() {
+      const distKey = APP_STATE.selectedDistrict || 'maitama';
+      const distInfo = DISTRICT_RATES[distKey] || DISTRICT_RATES.maitama;
+      const area = document.getElementById('input-land-area').value;
+      const omv = document.getElementById('out-omv-naira').textContent;
+      const fsv = document.getElementById('out-fsv-naira').textContent;
+      const rate = document.getElementById('out-sqm-rate').textContent;
+      const rent = document.getElementById('out-annual-rent').textContent;
+      const yieldPct = document.getElementById('out-yield-percent').textContent;
+      const curr = APP_STATE.currency || 'NGN';
+
+      const text = `*Abuja Property Valuation & Investment Estimate*\n` +
+        `Certified by Emmanuel Nwanjiobi & Co. (ESVARBON / NIESV)\n\n` +
+        `📍 *Location:* ${distInfo.name}\n` +
+        `📐 *Parcel Extent:* ${parseInt(area).toLocaleString()} sqm\n` +
+        `💰 *Open Market Value (OMV):* ${omv} (${curr})\n` +
+        `🏦 *Bank Collateral / FSV:* ${fsv}\n` +
+        `📊 *Land Benchmark Rate:* ${rate}\n` +
+        `📈 *Est. Annual Rent:* ${rent} (Yield: ${yieldPct})\n` +
+        `🛡️ *10-Yr Capital Appreciation:* +165% to +190%\n\n` +
+        `Need preliminary title verification at AGIS? Contact our survey desk: 30 Okemesi Crescent, Opposite Winner Lab, Garki 2, Abuja · Tel: +234 8060 820 365.`;
+
+      const url = `https://wa.me/2348060820365?text=${encodeURIComponent(text)}`;
+      window.open(url, '_blank');
+    }
+
+    // =======================================================================
+    // Export Specs Modal & Memorandum Generator
+    // =======================================================================
+    function openExportModal() {
+      const modal = document.getElementById('export-modal');
+      const contentEl = document.getElementById('modal-report-content');
+      const distInfo = DISTRICT_RATES[APP_STATE.selectedDistrict] || DISTRICT_RATES.maitama;
+
+      const area = parseInt(document.getElementById('input-land-area').value, 10);
+      const omv = document.getElementById('out-omv-naira').textContent;
+      const fsv = document.getElementById('out-fsv-naira').textContent;
+      const rate = document.getElementById('out-sqm-rate').textContent;
+      const yieldVal = document.getElementById('out-yield-percent').textContent;
+      const rapComp = document.getElementById('out-rap-compensation').textContent;
+      const fee = document.getElementById('out-appraisal-fee').textContent;
+      const devType = document.getElementById('select-dev-type').options[document.getElementById('select-dev-type').selectedIndex].text;
+      const title = document.getElementById('select-title-status').options[document.getElementById('select-title-status').selectedIndex].text;
+      const papCount = document.getElementById('input-pap-count').value;
+
+      const refNumber = `ENC-ABJ-${Math.floor(100000 + Math.random() * 900000)}`;
+      const currentDate = new Date().toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
+
+      contentEl.innerHTML = `
+        <div class="border-b border-white/10 pb-3 mb-3">
+          <div class="text-neon-emerald font-bold text-sm">EMMANUEL NWANJIOBI &amp; CO. — VALUATION &amp; RAP MEMORANDUM</div>
+          <div class="text-[11px] text-slate-400">Estate Surveyors &amp; Valuation Consultants · Registered with ESVARBON &amp; NIESV</div>
+          <div class="text-[10px] text-slate-500">Corporate Safeguards Practice: 30 Okemesi Crescent, Opposite Winner Lab, Garki 2, Abuja, FCT, Nigeria · Tel: +234 8060 820 365</div>
+          <div class="flex justify-between items-center text-[10px] text-slate-500 mt-2 pt-2 border-t border-white/5">
+            <span>Reference: <strong class="text-white">${refNumber}</strong></span>
+            <span>Date: ${currentDate}</span>
+          </div>
+        </div>
+
+        <div class="space-y-1.5 text-[11px]">
+          <div><strong class="text-slate-200">Subject Asset:</strong> Real Property &amp; Infrastructure Right-of-Way Corridor</div>
+          <div><strong class="text-slate-200">Location / Cadastral Zone:</strong> ${distInfo.name}</div>
+          <div><strong class="text-slate-200">Parcel Surface Extent:</strong> ${area.toLocaleString()} sqm</div>
+          <div><strong class="text-slate-200">Development Typology:</strong> ${devType}</div>
+          <div><strong class="text-slate-200">Cadastral Verification:</strong> Reconciled with Abuja Geographic Information Systems (AGIS)</div>
+          <div><strong class="text-slate-200">Title Documentation Status:</strong> ${title}</div>
+        </div>
+
+        <div class="my-3 p-3 bg-slate-950 rounded-lg border border-neon-emerald/30 space-y-1">
+          <div class="text-[11px] text-slate-400">ESTIMATED OPEN MARKET VALUE (OMV):</div>
+          <div class="text-lg font-bold text-neon-emerald">${omv}</div>
+          <div class="text-[11px] text-slate-400">FORCED SALE VALUE (FSV - 75%): <span class="text-white font-bold">${fsv}</span></div>
+          <div class="text-[10px] text-slate-500">Benchmark Rate: ${rate} · Projected Annual Capital Yield: ${yieldVal}</div>
+        </div>
+
+        <div class="p-3 bg-slate-950/80 rounded-lg border border-white/10 space-y-1 text-[11px]">
+          <div class="text-imperial-gold font-semibold uppercase tracking-wider text-[10px] flex items-center gap-1.5">
+            <i class="fa-solid fa-shield-halved"></i>
+            Resettlement Action Plan (RAP) &amp; Social Safeguards
+          </div>
+          <div>Project Affected Persons (PAP): <strong class="text-white">${papCount} Households / Displaced Entities</strong></div>
+          <div>Estimated Full Replacement Value (FRV) &amp; Livelihood Restoration: <strong class="text-imperial-gold">${rapComp}</strong></div>
+          <div>Safeguards Framework: <span class="text-slate-300">World Bank ESS5 / IFC PS5 (Involuntary Resettlement)</span></div>
+        </div>
+
+        <div class="text-[10px] text-slate-400 pt-2 border-t border-white/10 space-y-1">
+          <div class="flex justify-between items-center">
+            <span>Statutory Appraisal Scale Fee (NIESV Scale): <strong class="text-slate-200">${fee}</strong></span>
+            <span class="text-neon-emerald">Status: Institutional Advisory Brief</span>
+          </div>
+          <div class="text-[9px] text-slate-500 pt-1">
+            Certified by: Emmanuel Nwanjiobi (RSV, NIESV) · Principal Partner, Emmanuel Nwanjiobi &amp; Co. · Director of Resettlement &amp; Social Safeguards
+          </div>
+        </div>
+      `;
+
+      modal.classList.remove('hidden');
+    }
+
+    function closeExportModal() {
+      document.getElementById('export-modal').classList.add('hidden');
+      document.getElementById('copy-status').classList.add('hidden');
+    }
+
+    function copyReportToClipboard() {
+      const text = document.getElementById('modal-report-content').innerText;
+      navigator.clipboard.writeText(text).then(() => {
+        const status = document.getElementById('copy-status');
+        status.classList.remove('hidden');
+        setTimeout(() => status.classList.add('hidden'), 2500);
+      });
+    }
+
+    function printValuationReport() {
+      window.print();
+    }
+
+    // Smooth Scroll to 3D Twin Viewport
+    function scrollToTwin() {
+      const section = document.getElementById('digital-twin');
+      if (section) {
+        section.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+
+    // Mobile nav toggle
+    function toggleMobileNav() {
+      const nav = document.getElementById('mobile-nav');
+      const icon = document.getElementById('mobile-nav-icon');
+      if (nav.classList.contains('hidden')) {
+        nav.classList.remove('hidden');
+        icon.className = 'fa-solid fa-xmark text-lg';
+      } else {
+        nav.classList.add('hidden');
+        icon.className = 'fa-solid fa-bars text-lg';
+      }
+    }
+
+    // =======================================================================
+    // Verification & Due Diligence Modal Handlers
+    // =======================================================================
+    function openVerificationModal(presetDistrict) {
+      const modal = document.getElementById('verification-modal');
+      const formContainer = document.getElementById('verification-form-container');
+      const successContainer = document.getElementById('verification-success');
+      
+      if (formContainer && successContainer) {
+        formContainer.classList.remove('hidden');
+        successContainer.classList.add('hidden');
+      }
+
+      if (presetDistrict === 'institutional') {
+        const selectProfile = document.getElementById('verify-profile');
+        if (selectProfile) selectProfile.value = 'church_mosque';
+        const selectDist = document.getElementById('verify-district');
+        if (selectDist) selectDist.value = 'maitama';
+      } else if (presetDistrict === 'industrial') {
+        const selectProfile = document.getElementById('verify-profile');
+        if (selectProfile) selectProfile.value = 'industrial_logistics';
+        const selectDist = document.getElementById('verify-district');
+        if (selectDist) selectDist.value = 'idu';
+      } else if (presetDistrict) {
+        const selectDist = document.getElementById('verify-district');
+        if (selectDist && selectDist.querySelector(`option[value="${presetDistrict}"]`)) {
+          selectDist.value = presetDistrict;
+        }
+      } else if (APP_STATE && APP_STATE.selectedDistrict) {
+        const selectDist = document.getElementById('verify-district');
+        if (selectDist && selectDist.querySelector(`option[value="${APP_STATE.selectedDistrict}"]`)) {
+          selectDist.value = APP_STATE.selectedDistrict;
+        }
+      }
+
+      modal.classList.remove('hidden');
+    }
+
+    function closeVerificationModal() {
+      const modal = document.getElementById('verification-modal');
+      modal.classList.add('hidden');
+    }
+
+    function handleVerificationSubmit(e) {
+      e.preventDefault();
+      const formContainer = document.getElementById('verification-form-container');
+      const successContainer = document.getElementById('verification-success');
+      const refCodeEl = document.getElementById('ref-code');
+
+      const randomRef = `EN-VAL-2026-${Math.floor(1000 + Math.random() * 9000)}`;
+      if (refCodeEl) refCodeEl.textContent = randomRef;
+
+      if (formContainer && successContainer) {
+        formContainer.classList.add('hidden');
+        successContainer.classList.remove('hidden');
+      }
+
+      // Reset form fields
+      const form = document.getElementById('verify-plot-form');
+      if (form) form.reset();
+    }
+
+    function initUIListeners() {
+      // ESC key to close modals
+      window.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+          closeExportModal();
+          closeVerificationModal();
+        }
+      });
+    }
+  </script>
+
+</body>
+</html>
